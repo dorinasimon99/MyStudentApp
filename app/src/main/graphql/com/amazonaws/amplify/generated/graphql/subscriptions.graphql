@@ -1,0 +1,838 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateUserData($owner: String!) {
+  onCreateUserData(owner: $owner) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateUserData($owner: String!) {
+  onUpdateUserData(owner: $owner) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteUserData($owner: String!) {
+  onDeleteUserData(owner: $owner) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnCreateCourseData($owner: String) {
+  onCreateCourseData(owner: $owner) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateCourseData($owner: String) {
+  onUpdateCourseData(owner: $owner) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteCourseData($owner: String) {
+  onDeleteCourseData(owner: $owner) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnCreateCardData($owner: String) {
+  onCreateCardData(owner: $owner) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateCardData($owner: String) {
+  onUpdateCardData(owner: $owner) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteCardData($owner: String) {
+  onDeleteCardData(owner: $owner) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuizData($owner: String) {
+  onCreateQuizData(owner: $owner) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuizData($owner: String) {
+  onUpdateQuizData(owner: $owner) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuizData($owner: String) {
+  onDeleteQuizData(owner: $owner) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}

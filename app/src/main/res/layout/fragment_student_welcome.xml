@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hu.bme.aut.mystudentapp.ui.student.StudentWelcomeFragment"
+    android:orientation="vertical"
+    android:id="@+id/studentMain">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="20dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnClasses"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="5dp"
+                android:drawableTop="@drawable/ic_baseline_class_96"
+                android:text="@string/classes"
+                android:padding="30dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:id="@+id/btnSchedule"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="5dp"
+                android:drawableTop="@drawable/ic_baseline_schedule_96"
+                android:text="@string/schedule"
+                android:padding="30dp"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnProgress"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="5dp"
+                android:drawableTop="@drawable/ic_baseline_account_tree_96"
+                android:text="Progress"
+                android:padding="30dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:id="@+id/btnAnalytics"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="5dp"
+                android:drawableTop="@drawable/ic_baseline_timeline_96"
+                android:text="@string/analytics"
+                android:padding="30dp"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCards"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="5dp"
+                android:drawableTop="@drawable/ic_baseline_article_96"
+                android:text="@string/study_cards"
+                android:padding="30dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:id="@+id/btnToday"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="5dp"
+                android:drawableTop="@drawable/ic_baseline_today_96"
+                android:text="@string/today"
+                android:padding="30dp"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/loadingFragment">
+
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="hu.bme.aut.mystudentapp.ui.LoadingFragment"
+        tools:layout="@layout/fragment_loading"
+        android:label="LoadingFragment">
+
+        <action
+            android:id="@+id/action_loadingFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_studentMainFragment"
+            app:destination="@id/studentMainFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_teacherMainFragment"
+            app:destination="@id/teacherMainFragment" />
+        <action
+            android:id="@+id/action_loadingFragment_to_selectRoleFragment"
+            app:destination="@id/selectRoleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="hu.bme.aut.mystudentapp.ui.SignInFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="SignInFragment">
+
+        <action
+            android:id="@+id/action_signInFragment_to_studentMainFragment"
+            app:destination="@id/studentMainFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_teacherMainFragment"
+            app:destination="@id/teacherMainFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_selectRoleFragment"
+            app:destination="@id/selectRoleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/studentMainFragment"
+        android:name="hu.bme.aut.mystudentapp.ui.student.StudentWelcomeFragment"
+        tools:layout="@layout/fragment_student_welcome">
+
+        <action
+            android:id="@+id/action_studentMainFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teacherMainFragment"
+        android:name="hu.bme.aut.mystudentapp.ui.teacher.TeacherWelcomeFragment"
+        tools:layout="@layout/fragment_teacher_welcome">
+
+        <action
+            android:id="@+id/action_teacherMainFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectRoleFragment"
+        android:name="hu.bme.aut.mystudentapp.ui.SelectRoleDialogFragment"
+        tools:layout="@layout/fragment_dialog_select_role">
+    </fragment>
+
+</navigation>

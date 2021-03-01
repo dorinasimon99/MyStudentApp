@@ -1,0 +1,874 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateUserData(
+  $input: CreateUserDataInput!
+  $condition: ModelUserDataConditionInput
+) {
+  createUserData(input: $input, condition: $condition) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateUserData(
+  $input: UpdateUserDataInput!
+  $condition: ModelUserDataConditionInput
+) {
+  updateUserData(input: $input, condition: $condition) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteUserData(
+  $input: DeleteUserDataInput!
+  $condition: ModelUserDataConditionInput
+) {
+  deleteUserData(input: $input, condition: $condition) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation CreateCourseData(
+  $input: CreateCourseDataInput!
+  $condition: ModelCourseDataConditionInput
+) {
+  createCourseData(input: $input, condition: $condition) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateCourseData(
+  $input: UpdateCourseDataInput!
+  $condition: ModelCourseDataConditionInput
+) {
+  updateCourseData(input: $input, condition: $condition) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteCourseData(
+  $input: DeleteCourseDataInput!
+  $condition: ModelCourseDataConditionInput
+) {
+  deleteCourseData(input: $input, condition: $condition) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation CreateCardData(
+  $input: CreateCardDataInput!
+  $condition: ModelCardDataConditionInput
+) {
+  createCardData(input: $input, condition: $condition) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateCardData(
+  $input: UpdateCardDataInput!
+  $condition: ModelCardDataConditionInput
+) {
+  updateCardData(input: $input, condition: $condition) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteCardData(
+  $input: DeleteCardDataInput!
+  $condition: ModelCardDataConditionInput
+) {
+  deleteCardData(input: $input, condition: $condition) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateQuizData(
+  $input: CreateQuizDataInput!
+  $condition: ModelQuizDataConditionInput
+) {
+  createQuizData(input: $input, condition: $condition) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuizData(
+  $input: UpdateQuizDataInput!
+  $condition: ModelQuizDataConditionInput
+) {
+  updateQuizData(input: $input, condition: $condition) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuizData(
+  $input: DeleteQuizDataInput!
+  $condition: ModelQuizDataConditionInput
+) {
+  deleteQuizData(input: $input, condition: $condition) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}

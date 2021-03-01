@@ -1,0 +1,38 @@
+type UserData @model @auth (rules: [ { allow: owner} ]){
+  id: ID!
+  name: String
+  role: String!
+  grade: Int
+  courses: [CourseData]
+  cards: [CardData]
+  quizzes: [QuizData]
+}
+
+type CourseData @model @auth (rules: [ { allow: owner, operations: [read, update, delete]} { allow: groups, groups: ["users"], operations: [read, update]} ]){
+  id: ID!
+  courseCode: String!
+  name: String!
+  users: [UserData]
+  credits: Int!
+  quizzes: [QuizData]
+}
+
+type CardData @model @auth (rules: [ { allow: owner, operations: [read, update, delete]} 
+{ allow: groups, groups: ["users"], operations: [read, update]} ]){
+  id: ID!
+  ownerID: ID!
+  owner: UserData
+  course: CourseData
+  questions: [String]
+  answers: [String]
+}
+
+type QuizData @model @auth (rules: [ { allow: owner, operations: [read, update, delete]} 
+{ allow: groups, groups: ["users"], operations: [read]} ]){
+  id: ID!
+  ownerID: ID!
+  owner: UserData
+  course: CourseData
+  questions: [String]
+  answers: [String]
+}

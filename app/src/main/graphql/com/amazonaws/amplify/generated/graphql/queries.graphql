@@ -1,0 +1,644 @@
+# this is an auto generated file. This will be overwritten
+query SyncUserData(
+  $filter: ModelUserDataFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncUserData(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetUserData($id: ID!) {
+  getUserData(id: $id) {
+    id
+    name
+    role
+    grade
+    courses {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    cards {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListUserDatas(
+  $filter: ModelUserDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncCourseData(
+  $filter: ModelCourseDataFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncCourseData(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetCourseData($id: ID!) {
+  getCourseData(id: $id) {
+    id
+    courseCode
+    name
+    users {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    credits
+    quizzes {
+      items {
+        id
+        ownerID
+        questions
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListCourseDatas(
+  $filter: ModelCourseDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCourseDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncCardData(
+  $filter: ModelCardDataFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncCardData(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      ownerID
+      owner {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      course {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      questions
+      answers
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetCardData($id: ID!) {
+  getCardData(id: $id) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListCardDatas(
+  $filter: ModelCardDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCardDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      ownerID
+      owner {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      course {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      questions
+      answers
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncQuizData(
+  $filter: ModelQuizDataFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncQuizData(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      ownerID
+      owner {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      course {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      questions
+      answers
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetQuizData($id: ID!) {
+  getQuizData(id: $id) {
+    id
+    ownerID
+    owner {
+      id
+      name
+      role
+      grade
+      courses {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      cards {
+        nextToken
+        startedAt
+      }
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      credits
+      quizzes {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+    questions
+    answers
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListQuizDatas(
+  $filter: ModelQuizDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listQuizDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      ownerID
+      owner {
+        id
+        name
+        role
+        grade
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      course {
+        id
+        courseCode
+        name
+        credits
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      questions
+      answers
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}

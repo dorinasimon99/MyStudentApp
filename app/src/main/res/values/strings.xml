@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">MyStudentApp</string>
+    <string name="email">Email:</string>
+    <string name="email_hint">username@something.com</string>
+    <string name="password">Password:</string>
+    <string name="password_hint">password</string>
+    <string name="signin_student">Sign in as student</string>
+    <string name="signin_teacher">Sign in as teacher</string>
+    <string name="signin">Sign in</string>
+    <string name="classes">Classes</string>
+    <string name="schedule">Schedule</string>
+    <string name="progress">Progress</string>
+    <string name="analytics">Analytics</string>
+    <string name="study_cards">Study cards</string>
+    <string name="today">Today</string>
+    <string name="quiz">Quiz</string>
+    <string name="role_dialog_text">How would you like to use the app?</string>
+    <string name="as_student">As Student</string>
+    <string name="as_teacher">As Teacher</string>
+    <string name="ok">OK</string>
+    <string name="sign_out">Sign out</string>
+    <string name="name_optional">Username (optional):</string>
+    <string name="navigation_drawer_open">Navigation drawer open</string>
+    <string name="navigation_drawer_close">Navigation drawer close</string>
+</resources>
