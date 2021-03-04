@@ -20,20 +20,8 @@ class TeacherWelcomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setUpNavigationView()
         val view = inflater.inflate(R.layout.fragment_teacher_welcome, container, false)
         //TODO: btnClickListeners
         return view
-    }
-
-    private fun setUpNavigationView() {
-        nav_view.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { menuItem ->
-            if (menuItem.itemId == R.id.nav_sign_out){
-                Backend.signOut()
-                //TODO: back to login
-                return@OnNavigationItemSelectedListener true
-            }
-            else return@OnNavigationItemSelectedListener false
-        })
     }
 }

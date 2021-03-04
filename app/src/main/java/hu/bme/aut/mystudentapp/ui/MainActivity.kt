@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -40,11 +41,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer.addDrawerListener(toggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.bringToFront()
     }
 
     override fun onStart() {
         super.onStart()
-        //Backend.signOut()
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val data = Data.getUserData()
         Data.isSignedIn.observe(this, Observer<Boolean> { isSignedUp ->
@@ -78,18 +82,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
     }
 
-   /* override fun onConfigurationChanged(newConfig: Configuration?) {
-        super.onConfigurationChanged(newConfig)
-        toggle.onConfigurationChanged(newConfig)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }*/
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Backend.handleWebUISignInResponse(requestCode, resultCode, data)
@@ -103,11 +95,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             R.id.nav_sign_out ->
             {
+                Log.i(TAG, "Sign out clicked")
                 Backend.signOut()
                 Toast.makeText(this, "Signed out!", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.signInFragment)
             }
         }
+        drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 }
