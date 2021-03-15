@@ -1,13 +1,12 @@
 package hu.bme.aut.mystudentapp.backend
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
-import com.amplifyframework.api.graphql.model.ModelMutation
-import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.auth.AuthChannelEventName
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
@@ -16,19 +15,17 @@ import com.amplifyframework.auth.result.AuthSessionResult
 import com.amplifyframework.auth.result.AuthSignInResult
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.InitializationStatus
-import com.amplifyframework.datastore.generated.model.CourseData
 import com.amplifyframework.datastore.generated.model.UserData
 import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
-import com.amplifyframework.storage.s3.AWSS3StoragePlugin
-import hu.bme.aut.mystudentapp.ui.MainActivity
-import java.util.*
 
-object Backend {
+object NetworkBackend {
 
-    private const val TAG = "Backend"
+    private val TAG = "NetworkBackend"
 
-    fun initialize(applicationContext: Context): Backend {
+    private var userData = false
+
+    fun initialize(applicationContext: Context): NetworkBackend {
         try {
             Amplify.addPlugin(AWSCognitoAuthPlugin())
             Amplify.addPlugin(AWSApiPlugin())
@@ -89,13 +86,17 @@ object Backend {
             },
             { error -> Log.i(TAG, error.toString()) }
         )
-
         return this
     }
 
     fun updateUserData(withSignedInStatus: Boolean) {
-        Data.setSignedIn(withSignedInStatus)
+        UserDataBackend.setSignedIn(withSignedInStatus)
+        userData = withSignedInStatus
+
+        //UserDataBackend.getUserData()
     }
+
+    fun userData() = userData
 
     fun signOut() {
         Log.i(TAG, "Initiate Signout Sequence")
@@ -124,7 +125,7 @@ object Backend {
         }
     }
 
-    fun loadCourse(){
+    /*fun loadCourse(){
         Log.i(TAG, "Loading course")
 
         Amplify.API.query(
@@ -133,14 +134,14 @@ object Backend {
                 Log.i(TAG, "Queried")
                 for(courseData in response.data){
                     Log.i(TAG, courseData.name)
-                    Data.addCourse(Data.Course.from(courseData))
+                    UserData.addCourse(UserData.Course.from(courseData))
                 }
             },
             { error -> Log.e(TAG, "Query failure", error) }
         )
     }
 
-    fun createCourse(course: Data.Course){
+    fun createCourse(course: hu.bme.aut.mystudentapp.backend.Data.UserData.Course){
         Log.i(TAG, "Creating course")
 
         Amplify.API.mutate(
@@ -155,5 +156,5 @@ object Backend {
             },
             { error -> Log.e(TAG, "Create failed", error) }
         )
-    }
+    }*/
 }
