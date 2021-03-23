@@ -27,7 +27,4 @@ class UserDataSource @Inject constructor(){
     fun setUserData(user: User){
         UserDataBackend.setUserData(user)
     }
-
-
-
 }

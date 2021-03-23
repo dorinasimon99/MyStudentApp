@@ -9,66 +9,41 @@ mutation CreateUserData(
     role
     grade
     courses {
-      id
-      courseCode
-      name
-      users {
+      items {
         id
+        courseCode
         name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
+        credits
         createdAt
         updatedAt
         owner
       }
-      credits
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
     quizzes {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        quizQuestions
+        quizAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     owner
@@ -84,66 +59,41 @@ mutation UpdateUserData(
     role
     grade
     courses {
-      id
-      courseCode
-      name
-      users {
+      items {
         id
+        courseCode
         name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
+        credits
         createdAt
         updatedAt
         owner
       }
-      credits
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
     quizzes {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        quizQuestions
+        quizAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     owner
@@ -159,66 +109,41 @@ mutation DeleteUserData(
     role
     grade
     courses {
-      id
-      courseCode
-      name
-      users {
+      items {
         id
+        courseCode
         name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
+        credits
         createdAt
         updatedAt
         owner
       }
-      credits
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
     quizzes {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        quizQuestions
+        quizAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     owner
@@ -233,56 +158,42 @@ mutation CreateCourseData(
     courseCode
     name
     users {
-      id
-      name
-      role
-      grade
-      courses {
+      items {
         id
-        courseCode
         name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
+        role
+        grade
         createdAt
         updatedAt
         owner
       }
-      cards {
-        nextToken
-        startedAt
-      }
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     credits
-    quizzes {
+    cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
+    quizzes {
+      items {
+        id
+        ownerID
+        courseID
+        quizQuestions
+        quizAnswers
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
     owner
@@ -297,56 +208,42 @@ mutation UpdateCourseData(
     courseCode
     name
     users {
-      id
-      name
-      role
-      grade
-      courses {
+      items {
         id
-        courseCode
         name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
+        role
+        grade
         createdAt
         updatedAt
         owner
       }
-      cards {
-        nextToken
-        startedAt
-      }
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     credits
-    quizzes {
+    cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
+    quizzes {
+      items {
+        id
+        ownerID
+        courseID
+        quizQuestions
+        quizAnswers
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
     owner
@@ -361,56 +258,42 @@ mutation DeleteCourseData(
     courseCode
     name
     users {
-      id
-      name
-      role
-      grade
-      courses {
+      items {
         id
-        courseCode
         name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
+        role
+        grade
         createdAt
         updatedAt
         owner
       }
-      cards {
-        nextToken
-        startedAt
-      }
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     credits
-    quizzes {
+    cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
+    quizzes {
+      items {
+        id
+        ownerID
+        courseID
+        quizQuestions
+        quizAnswers
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
     owner
@@ -429,65 +312,39 @@ mutation CreateCardData(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    cardQuestions
+    cardAnswers
     createdAt
     updatedAt
   }
@@ -505,65 +362,39 @@ mutation UpdateCardData(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    cardQuestions
+    cardAnswers
     createdAt
     updatedAt
   }
@@ -581,65 +412,39 @@ mutation DeleteCardData(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    cardQuestions
+    cardAnswers
     createdAt
     updatedAt
   }
@@ -657,65 +462,39 @@ mutation CreateQuizData(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    quizQuestions
+    quizAnswers
     createdAt
     updatedAt
   }
@@ -733,65 +512,39 @@ mutation UpdateQuizData(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    quizQuestions
+    quizAnswers
     createdAt
     updatedAt
   }
@@ -809,65 +562,39 @@ mutation DeleteQuizData(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    quizQuestions
+    quizAnswers
     createdAt
     updatedAt
   }

@@ -121,6 +121,38 @@ Parameters:
     Type: String
   
             
+        
+  userPoolGroupList:
+    Type: CommaDelimitedList
+      
+  serviceName:
+    Type: String
+  
+            
+  
+  usernameCaseSensitive:
+    Type: String
+            
+      
+  parentStack:
+    Type: String
+        
+        
+  permissions:
+    Type: CommaDelimitedList
+      
+        
+  dependsOn:
+    Type: CommaDelimitedList
+      
+  
+  userPoolGroups:
+    Type: String
+            
+  
+  adminQueries:
+    Type: String
+            
   hostedUIDomainName:
     Type: String
   
@@ -141,29 +173,9 @@ Parameters:
     Type: String
   
             
-        
-  userPoolGroupList:
-    Type: CommaDelimitedList
-      
             
-  serviceName:
-    Type: String
-  
-            
-  
-  usernameCaseSensitive:
-    Type: String
-            
-      
-  parentStack:
-    Type: String
         
-        
-  permissions:
-    Type: CommaDelimitedList
-      
-        
-  dependsOn:
+  authProviders:
     Type: CommaDelimitedList
       
 Conditions:
@@ -267,6 +279,9 @@ Resources:
     Properties:
       ClientName: mystud61fa3dde_app_clientWeb
       
+      ReadAttributes: !Ref userpoolClientReadAttributes
+      WriteAttributes: !Ref userpoolClientWriteAttributes
+      
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
     DependsOn: UserPool
@@ -276,6 +291,9 @@ Resources:
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: mystud61fa3dde_app_client
+      
+      ReadAttributes: !Ref userpoolClientReadAttributes
+      WriteAttributes: !Ref userpoolClientWriteAttributes
       
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
@@ -747,7 +765,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties:
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'mystudentapp61fa3dde_identitypool_61fa3dde', !Join ['',['mystudentapp61fa3dde_identitypool_61fa3dde', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'mystudentapp61fa3dde_identitypool_c0b02c1b', !Join ['',['mystudentapp61fa3dde_identitypool_c0b02c1b', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

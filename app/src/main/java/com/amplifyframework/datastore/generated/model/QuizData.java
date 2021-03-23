@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,39 +22,48 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the QuizData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "QuizData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.READ, ModelOperation.UPDATE, ModelOperation.DELETE }),
-  @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ }),
+  @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ, ModelOperation.UPDATE })
 })
+@Index(name = "byUser", fields = {"ownerID"})
+@Index(name = "byCourse", fields = {"courseID"})
 public final class QuizData implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField OWNER_ID = field("ownerID");
-  public static final QueryField QUESTIONS = field("questions");
-  public static final QueryField ANSWERS = field("answers");
+  public static final QueryField OWNER = field( "ownerID");
+  public static final QueryField COURSE = field("courseID");
+  public static final QueryField QUIZ_QUESTIONS = field("quizQuestions");
+  public static final QueryField QUIZ_ANSWERS = field("quizAnswers");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String ownerID;
-  private final @ModelField(targetType="String") List<String> questions;
-  private final @ModelField(targetType="String") List<String> answers;
+  private final @ModelField(targetType="UserData") @BelongsTo(targetName = "ownerID", type = UserData.class) UserData owner;
+  private final @ModelField(targetType="CourseData") @BelongsTo(targetName = "courseID", type = CourseData.class) CourseData course;
+  private final @ModelField(targetType="String") List<String> quizQuestions;
+  private final @ModelField(targetType="String") List<String> quizAnswers;
   public String getId() {
       return id;
   }
   
-  public String getOwnerId() {
-      return ownerID;
+  public UserData getOwner() {
+      return owner;
   }
   
-  public List<String> getQuestions() {
-      return questions;
+  public CourseData getCourse() {
+      return course;
   }
   
-  public List<String> getAnswers() {
-      return answers;
+  public List<String> getQuizQuestions() {
+      return quizQuestions;
   }
   
-  private QuizData(String id, String ownerID, List<String> questions, List<String> answers) {
+  public List<String> getQuizAnswers() {
+      return quizAnswers;
+  }
+  
+  private QuizData(String id, UserData owner, CourseData course, List<String> quizQuestions, List<String> quizAnswers) {
     this.id = id;
-    this.ownerID = ownerID;
-    this.questions = questions;
-    this.answers = answers;
+    this.owner = owner;
+    this.course = course;
+    this.quizQuestions = quizQuestions;
+    this.quizAnswers = quizAnswers;
   }
   
   @Override
@@ -65,9 +75,10 @@ public final class QuizData implements Model {
       } else {
       QuizData quizData = (QuizData) obj;
       return ObjectsCompat.equals(getId(), quizData.getId()) &&
-              ObjectsCompat.equals(getOwnerId(), quizData.getOwnerId()) &&
-              ObjectsCompat.equals(getQuestions(), quizData.getQuestions()) &&
-              ObjectsCompat.equals(getAnswers(), quizData.getAnswers());
+              ObjectsCompat.equals(getOwner(), quizData.getOwner()) &&
+              ObjectsCompat.equals(getCourse(), quizData.getCourse()) &&
+              ObjectsCompat.equals(getQuizQuestions(), quizData.getQuizQuestions()) &&
+              ObjectsCompat.equals(getQuizAnswers(), quizData.getQuizAnswers());
       }
   }
   
@@ -75,9 +86,10 @@ public final class QuizData implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getOwnerId())
-      .append(getQuestions())
-      .append(getAnswers())
+      .append(getOwner())
+      .append(getCourse())
+      .append(getQuizQuestions())
+      .append(getQuizAnswers())
       .toString()
       .hashCode();
   }
@@ -87,14 +99,15 @@ public final class QuizData implements Model {
     return new StringBuilder()
       .append("QuizData {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("ownerID=" + String.valueOf(getOwnerId()) + ", ")
-      .append("questions=" + String.valueOf(getQuestions()) + ", ")
-      .append("answers=" + String.valueOf(getAnswers()))
+      .append("owner=" + String.valueOf(getOwner()) + ", ")
+      .append("course=" + String.valueOf(getCourse()) + ", ")
+      .append("quizQuestions=" + String.valueOf(getQuizQuestions()) + ", ")
+      .append("quizAnswers=" + String.valueOf(getQuizAnswers()))
       .append("}")
       .toString();
   }
   
-  public static OwnerIdStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -121,61 +134,67 @@ public final class QuizData implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      ownerID,
-      questions,
-      answers);
+      owner,
+      course,
+      quizQuestions,
+      quizAnswers);
   }
-  public interface OwnerIdStep {
-    BuildStep ownerId(String ownerId);
-  }
-  
-
   public interface BuildStep {
     QuizData build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep questions(List<String> questions);
-    BuildStep answers(List<String> answers);
+    BuildStep owner(UserData owner);
+    BuildStep course(CourseData course);
+    BuildStep quizQuestions(List<String> quizQuestions);
+    BuildStep quizAnswers(List<String> quizAnswers);
   }
   
 
-  public static class Builder implements OwnerIdStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private String ownerID;
-    private List<String> questions;
-    private List<String> answers;
+    private UserData owner;
+    private CourseData course;
+    private List<String> quizQuestions;
+    private List<String> quizAnswers;
     @Override
      public QuizData build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new QuizData(
           id,
-          ownerID,
-          questions,
-          answers);
+          owner,
+          course,
+          quizQuestions,
+          quizAnswers);
     }
     
     @Override
-     public BuildStep ownerId(String ownerId) {
-        Objects.requireNonNull(ownerId);
-        this.ownerID = ownerId;
+     public BuildStep owner(UserData owner) {
+        this.owner = owner;
         return this;
     }
     
     @Override
-     public BuildStep questions(List<String> questions) {
-        this.questions = questions;
+     public BuildStep course(CourseData course) {
+        this.course = course;
         return this;
     }
     
     @Override
-     public BuildStep answers(List<String> answers) {
-        this.answers = answers;
+     public BuildStep quizQuestions(List<String> quizQuestions) {
+        this.quizQuestions = quizQuestions;
+        return this;
+    }
+    
+    @Override
+     public BuildStep quizAnswers(List<String> quizAnswers) {
+        this.quizAnswers = quizAnswers;
         return this;
     }
     
@@ -202,26 +221,32 @@ public final class QuizData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String ownerId, List<String> questions, List<String> answers) {
+    private CopyOfBuilder(String id, UserData owner, CourseData course, List<String> quizQuestions, List<String> quizAnswers) {
       super.id(id);
-      super.ownerId(ownerId)
-        .questions(questions)
-        .answers(answers);
+      super.owner(owner)
+        .course(course)
+        .quizQuestions(quizQuestions)
+        .quizAnswers(quizAnswers);
     }
     
     @Override
-     public CopyOfBuilder ownerId(String ownerId) {
-      return (CopyOfBuilder) super.ownerId(ownerId);
+     public CopyOfBuilder owner(UserData owner) {
+      return (CopyOfBuilder) super.owner(owner);
     }
     
     @Override
-     public CopyOfBuilder questions(List<String> questions) {
-      return (CopyOfBuilder) super.questions(questions);
+     public CopyOfBuilder course(CourseData course) {
+      return (CopyOfBuilder) super.course(course);
     }
     
     @Override
-     public CopyOfBuilder answers(List<String> answers) {
-      return (CopyOfBuilder) super.answers(answers);
+     public CopyOfBuilder quizQuestions(List<String> quizQuestions) {
+      return (CopyOfBuilder) super.quizQuestions(quizQuestions);
+    }
+    
+    @Override
+     public CopyOfBuilder quizAnswers(List<String> quizAnswers) {
+      return (CopyOfBuilder) super.quizAnswers(quizAnswers);
     }
   }
   

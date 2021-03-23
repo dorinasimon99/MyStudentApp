@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import hu.bme.aut.mystudentapp.backend.NetworkBackend
+import hu.bme.aut.mystudentapp.data.model.Role
 import javax.inject.Inject
 import javax.inject.Singleton
 

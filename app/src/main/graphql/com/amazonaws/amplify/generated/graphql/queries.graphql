@@ -1,52 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query SyncUserData(
-  $filter: ModelUserDataFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncUserData(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      role
-      grade
-      courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      cards {
-        nextToken
-        startedAt
-      }
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-    nextToken
-    startedAt
-  }
-}
 query GetUserData($id: ID!) {
   getUserData(id: $id) {
     id
@@ -54,66 +6,41 @@ query GetUserData($id: ID!) {
     role
     grade
     courses {
-      id
-      courseCode
-      name
-      users {
+      items {
         id
+        courseCode
         name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
+        credits
         createdAt
         updatedAt
         owner
       }
-      credits
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
     quizzes {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        quizQuestions
+        quizAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
     owner
@@ -131,78 +58,19 @@ query ListUserDatas(
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
     nextToken
-    startedAt
-  }
-}
-query SyncCourseData(
-  $filter: ModelCourseDataFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncCourseData(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      courseCode
-      name
-      users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      credits
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-    nextToken
-    startedAt
   }
 }
 query GetCourseData($id: ID!) {
@@ -211,56 +79,42 @@ query GetCourseData($id: ID!) {
     courseCode
     name
     users {
-      id
-      name
-      role
-      grade
-      courses {
+      items {
         id
-        courseCode
         name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
+        role
+        grade
         createdAt
         updatedAt
         owner
       }
-      cards {
-        nextToken
-        startedAt
-      }
-      quizzes {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
+      nextToken
     }
     credits
-    quizzes {
+    cards {
       items {
         id
         ownerID
-        questions
-        answers
-        _version
-        _deleted
-        _lastChangedAt
+        courseID
+        cardQuestions
+        cardAnswers
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
+    quizzes {
+      items {
+        id
+        ownerID
+        courseID
+        quizQuestions
+        quizAnswers
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
     createdAt
     updatedAt
     owner
@@ -277,82 +131,20 @@ query ListCourseDatas(
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
     nextToken
-    startedAt
-  }
-}
-query SyncCardData(
-  $filter: ModelCardDataFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncCardData(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      ownerID
-      owner {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      course {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      questions
-      answers
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetCardData($id: ID!) {
@@ -365,65 +157,39 @@ query GetCardData($id: ID!) {
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    cardQuestions
+    cardAnswers
     createdAt
     updatedAt
   }
@@ -442,86 +208,26 @@ query ListCardDatas(
         name
         role
         grade
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
+      courseID
       course {
         id
         courseCode
         name
         credits
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
-      questions
-      answers
-      _version
-      _deleted
-      _lastChangedAt
+      cardQuestions
+      cardAnswers
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncQuizData(
-  $filter: ModelQuizDataFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncQuizData(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      ownerID
-      owner {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      course {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      questions
-      answers
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetQuizData($id: ID!) {
@@ -534,65 +240,39 @@ query GetQuizData($id: ID!) {
       role
       grade
       courses {
-        id
-        courseCode
-        name
-        credits
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       cards {
         nextToken
-        startedAt
       }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
+    courseID
     course {
       id
       courseCode
       name
       users {
-        id
-        name
-        role
-        grade
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
+        nextToken
       }
       credits
+      cards {
+        nextToken
+      }
       quizzes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
-    questions
-    answers
-    _version
-    _deleted
-    _lastChangedAt
+    quizQuestions
+    quizAnswers
     createdAt
     updatedAt
   }
@@ -611,34 +291,25 @@ query ListQuizDatas(
         name
         role
         grade
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
+      courseID
       course {
         id
         courseCode
         name
         credits
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
-      questions
-      answers
-      _version
-      _deleted
-      _lastChangedAt
+      quizQuestions
+      quizAnswers
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
   }
 }

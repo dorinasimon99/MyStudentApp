@@ -1,38 +1,63 @@
-type UserData @model @auth (rules: [ { allow: owner} ]){
+type UserData
+@model
+@auth(rules: [ { allow: owner }])
+{
   id: ID!
   name: String
   role: String!
   grade: Int
-  courses: [CourseData]
-  cards: [CardData]
-  quizzes: [QuizData]
+  courses: [UserCourse] @connection(name: "UserCourses")
+  cards: [CardData] @connection(keyName: "byUser", fields: ["id"])
+  quizzes: [QuizData] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type CourseData @model @auth (rules: [ { allow: owner, operations: [read, update, delete]} { allow: groups, groups: ["users"], operations: [read, update]} ]){
+type CourseData
+@model
+@auth(rules: [ { allow: owner } { allow: groups, groups: ["users"], operations: [read, update]} ])
+{
   id: ID!
   courseCode: String!
   name: String!
-  users: [UserData]
+  users: [UserCourse] @connection(name: "CourseUsers")
   credits: Int!
-  quizzes: [QuizData]
+  cards: [CardData] @connection(keyName: "byCourse", fields: ["id"])
+  quizzes: [QuizData] @connection(keyName: "byCourse", fields: ["id"])
 }
 
-type CardData @model @auth (rules: [ { allow: owner, operations: [read, update, delete]} 
-{ allow: groups, groups: ["users"], operations: [read, update]} ]){
+type UserCourse
+@model
+@auth (rules: [ { allow : owner } ])
+{
   id: ID!
-  ownerID: ID!
-  owner: UserData
-  course: CourseData
-  questions: [String]
-  answers: [String]
+  user: UserData! @connection(name: "UserCourses")
+  course: CourseData! @connection(name: "CourseUsers")
 }
 
-type QuizData @model @auth (rules: [ { allow: owner, operations: [read, update, delete]} 
-{ allow: groups, groups: ["users"], operations: [read]} ]){
+
+type CardData
+@model
+@auth(rules: [ { allow: owner } { allow: groups, groups: ["users"], operations: [read, update]} ]) 
+@key(name: "byUser", fields: ["ownerID"]) @key(name: "byCourse", fields: ["courseID"])
+{
   id: ID!
   ownerID: ID!
-  owner: UserData
-  course: CourseData
-  questions: [String]
-  answers: [String]
+  owner: UserData @connection(fields: ["ownerID"])
+  courseID: ID!
+  course: CourseData @connection(fields: ["courseID"])
+  cardQuestions: [String]
+  cardAnswers: [String]
+}
+
+type QuizData
+@model
+@auth(rules: [ { allow: owner } { allow: groups, groups: ["users"], operations: [read, update]} ])
+@key(name: "byUser", fields: ["ownerID"]) @key(name: "byCourse", fields: ["courseID"])
+{
+  id: ID!
+  ownerID: ID!
+  owner: UserData @connection(fields: ["ownerID"])
+  courseID: ID!
+  course: CourseData @connection(fields: ["courseID"])
+  quizQuestions: [String]
+  quizAnswers: [String]
 }

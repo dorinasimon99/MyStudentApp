@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,13 +26,16 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 })
 public final class UserData implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField NAME = field( "name");
+  public static final QueryField NAME = field("name");
   public static final QueryField ROLE = field("role");
   public static final QueryField GRADE = field("grade");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="String", isRequired = true) String role;
   private final @ModelField(targetType="Int") Integer grade;
+  private final @ModelField(targetType="UserCourse") @HasMany(associatedWith = "user", type = UserCourse.class) List<UserCourse> courses = null;
+  private final @ModelField(targetType="CardData") @HasMany(associatedWith = "owner", type = CardData.class) List<CardData> cards = null;
+  private final @ModelField(targetType="QuizData") @HasMany(associatedWith = "owner", type = QuizData.class) List<QuizData> quizzes = null;
   public String getId() {
       return id;
   }
@@ -46,6 +50,18 @@ public final class UserData implements Model {
   
   public Integer getGrade() {
       return grade;
+  }
+  
+  public List<UserCourse> getCourses() {
+      return courses;
+  }
+  
+  public List<CardData> getCards() {
+      return cards;
+  }
+  
+  public List<QuizData> getQuizzes() {
+      return quizzes;
   }
   
   private UserData(String id, String name, String role, Integer grade) {

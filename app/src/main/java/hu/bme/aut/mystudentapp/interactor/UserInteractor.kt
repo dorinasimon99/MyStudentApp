@@ -3,10 +3,7 @@ package hu.bme.aut.mystudentapp.interactor
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import hu.bme.aut.mystudentapp.data.NetworkDataSource
 import hu.bme.aut.mystudentapp.data.UserDataSource
 import hu.bme.aut.mystudentapp.data.model.User

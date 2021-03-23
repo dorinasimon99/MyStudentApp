@@ -1,5 +1,5 @@
 {
-    "identityPoolName": "mystudentapp61fa3dde_identitypool_61fa3dde",
+    "identityPoolName": "mystudentapp61fa3dde_identitypool_c0b02c1b",
     "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "mystud61fa3dde",
     "userPoolName": "mystudentapp61fa3dde_userpool_61fa3dde",
@@ -29,7 +29,7 @@
         "email"
     ],
     "userpoolClientLambdaRole": "mystud61fa3dde_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "sharedId": "61fa3dde",
     "resourceName": "mystudentapp61fa3dde",
     "authSelections": "identityPoolAndUserPool",
@@ -48,10 +48,6 @@
     "useDefault": "defaultSocial",
     "hostedUI": true,
     "triggers": "{}",
-    "hostedUIDomainName": "mystudentapp61fa3dde-61fa3dde",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"studentapp://\"],\"LogoutURLs\":[\"studentapp://\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
@@ -59,5 +55,12 @@
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "dependsOn": []
+    "dependsOn": [],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "hostedUIDomainName": "mystudentapp0711db1f-0711db1f",
+    "authProvidersUserPool": [],
+    "hostedUIProviderMeta": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\"],\"CallbackURLs\":[\"studentapp://\"],\"LogoutURLs\":[\"studentapp://\"]}",
+    "authProviders": []
 }

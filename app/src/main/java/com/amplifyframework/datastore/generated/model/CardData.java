@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,39 +22,48 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the CardData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "CardData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.READ, ModelOperation.UPDATE, ModelOperation.DELETE }),
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ }),
   @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ, ModelOperation.UPDATE })
 })
+@Index(name = "byUser", fields = {"ownerID"})
+@Index(name = "byCourse", fields = {"courseID"})
 public final class CardData implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField OWNER_ID = field("ownerID");
-  public static final QueryField QUESTIONS = field("questions");
-  public static final QueryField ANSWERS = field("answers");
+  public static final QueryField OWNER = field("ownerID");
+  public static final QueryField COURSE = field("courseID");
+  public static final QueryField CARD_QUESTIONS = field("cardQuestions");
+  public static final QueryField CARD_ANSWERS = field( "cardAnswers");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="ID", isRequired = true) String ownerID;
-  private final @ModelField(targetType="String") List<String> questions;
-  private final @ModelField(targetType="String") List<String> answers;
+  private final @ModelField(targetType="UserData") @BelongsTo(targetName = "ownerID", type = UserData.class) UserData owner;
+  private final @ModelField(targetType="CourseData") @BelongsTo(targetName = "courseID", type = CourseData.class) CourseData course;
+  private final @ModelField(targetType="String") List<String> cardQuestions;
+  private final @ModelField(targetType="String") List<String> cardAnswers;
   public String getId() {
       return id;
   }
   
-  public String getOwnerId() {
-      return ownerID;
+  public UserData getOwner() {
+      return owner;
   }
   
-  public List<String> getQuestions() {
-      return questions;
+  public CourseData getCourse() {
+      return course;
   }
   
-  public List<String> getAnswers() {
-      return answers;
+  public List<String> getCardQuestions() {
+      return cardQuestions;
   }
   
-  private CardData(String id, String ownerID, List<String> questions, List<String> answers) {
+  public List<String> getCardAnswers() {
+      return cardAnswers;
+  }
+  
+  private CardData(String id, UserData owner, CourseData course, List<String> cardQuestions, List<String> cardAnswers) {
     this.id = id;
-    this.ownerID = ownerID;
-    this.questions = questions;
-    this.answers = answers;
+    this.owner = owner;
+    this.course = course;
+    this.cardQuestions = cardQuestions;
+    this.cardAnswers = cardAnswers;
   }
   
   @Override
@@ -65,9 +75,10 @@ public final class CardData implements Model {
       } else {
       CardData cardData = (CardData) obj;
       return ObjectsCompat.equals(getId(), cardData.getId()) &&
-              ObjectsCompat.equals(getOwnerId(), cardData.getOwnerId()) &&
-              ObjectsCompat.equals(getQuestions(), cardData.getQuestions()) &&
-              ObjectsCompat.equals(getAnswers(), cardData.getAnswers());
+              ObjectsCompat.equals(getOwner(), cardData.getOwner()) &&
+              ObjectsCompat.equals(getCourse(), cardData.getCourse()) &&
+              ObjectsCompat.equals(getCardQuestions(), cardData.getCardQuestions()) &&
+              ObjectsCompat.equals(getCardAnswers(), cardData.getCardAnswers());
       }
   }
   
@@ -75,9 +86,10 @@ public final class CardData implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getOwnerId())
-      .append(getQuestions())
-      .append(getAnswers())
+      .append(getOwner())
+      .append(getCourse())
+      .append(getCardQuestions())
+      .append(getCardAnswers())
       .toString()
       .hashCode();
   }
@@ -87,14 +99,15 @@ public final class CardData implements Model {
     return new StringBuilder()
       .append("CardData {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("ownerID=" + String.valueOf(getOwnerId()) + ", ")
-      .append("questions=" + String.valueOf(getQuestions()) + ", ")
-      .append("answers=" + String.valueOf(getAnswers()))
+      .append("owner=" + String.valueOf(getOwner()) + ", ")
+      .append("course=" + String.valueOf(getCourse()) + ", ")
+      .append("cardQuestions=" + String.valueOf(getCardQuestions()) + ", ")
+      .append("cardAnswers=" + String.valueOf(getCardAnswers()))
       .append("}")
       .toString();
   }
   
-  public static OwnerIdStep builder() {
+  public static BuildStep builder() {
       return new Builder();
   }
   
@@ -121,61 +134,67 @@ public final class CardData implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      ownerID,
-      questions,
-      answers);
+      owner,
+      course,
+      cardQuestions,
+      cardAnswers);
   }
-  public interface OwnerIdStep {
-    BuildStep ownerId(String ownerId);
-  }
-  
-
   public interface BuildStep {
     CardData build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep questions(List<String> questions);
-    BuildStep answers(List<String> answers);
+    BuildStep owner(UserData owner);
+    BuildStep course(CourseData course);
+    BuildStep cardQuestions(List<String> cardQuestions);
+    BuildStep cardAnswers(List<String> cardAnswers);
   }
   
 
-  public static class Builder implements OwnerIdStep, BuildStep {
+  public static class Builder implements BuildStep {
     private String id;
-    private String ownerID;
-    private List<String> questions;
-    private List<String> answers;
+    private UserData owner;
+    private CourseData course;
+    private List<String> cardQuestions;
+    private List<String> cardAnswers;
     @Override
      public CardData build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new CardData(
           id,
-          ownerID,
-          questions,
-          answers);
+          owner,
+          course,
+          cardQuestions,
+          cardAnswers);
     }
     
     @Override
-     public BuildStep ownerId(String ownerId) {
-        Objects.requireNonNull(ownerId);
-        this.ownerID = ownerId;
+     public BuildStep owner(UserData owner) {
+        this.owner = owner;
         return this;
     }
     
     @Override
-     public BuildStep questions(List<String> questions) {
-        this.questions = questions;
+     public BuildStep course(CourseData course) {
+        this.course = course;
         return this;
     }
     
     @Override
-     public BuildStep answers(List<String> answers) {
-        this.answers = answers;
+     public BuildStep cardQuestions(List<String> cardQuestions) {
+        this.cardQuestions = cardQuestions;
+        return this;
+    }
+    
+    @Override
+     public BuildStep cardAnswers(List<String> cardAnswers) {
+        this.cardAnswers = cardAnswers;
         return this;
     }
     
@@ -202,26 +221,32 @@ public final class CardData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String ownerId, List<String> questions, List<String> answers) {
+    private CopyOfBuilder(String id, UserData owner, CourseData course, List<String> cardQuestions, List<String> cardAnswers) {
       super.id(id);
-      super.ownerId(ownerId)
-        .questions(questions)
-        .answers(answers);
+      super.owner(owner)
+        .course(course)
+        .cardQuestions(cardQuestions)
+        .cardAnswers(cardAnswers);
     }
     
     @Override
-     public CopyOfBuilder ownerId(String ownerId) {
-      return (CopyOfBuilder) super.ownerId(ownerId);
+     public CopyOfBuilder owner(UserData owner) {
+      return (CopyOfBuilder) super.owner(owner);
     }
     
     @Override
-     public CopyOfBuilder questions(List<String> questions) {
-      return (CopyOfBuilder) super.questions(questions);
+     public CopyOfBuilder course(CourseData course) {
+      return (CopyOfBuilder) super.course(course);
     }
     
     @Override
-     public CopyOfBuilder answers(List<String> answers) {
-      return (CopyOfBuilder) super.answers(answers);
+     public CopyOfBuilder cardQuestions(List<String> cardQuestions) {
+      return (CopyOfBuilder) super.cardQuestions(cardQuestions);
+    }
+    
+    @Override
+     public CopyOfBuilder cardAnswers(List<String> cardAnswers) {
+      return (CopyOfBuilder) super.cardAnswers(cardAnswers);
     }
   }
   

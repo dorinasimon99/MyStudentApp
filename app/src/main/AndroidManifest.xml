@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="hu.bme.aut.mystudentapp.view.MainActivity">
+        <activity android:name="hu.bme.aut.mystudentapp.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

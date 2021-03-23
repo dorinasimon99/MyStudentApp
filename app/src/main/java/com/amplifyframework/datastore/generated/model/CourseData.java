@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +22,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the CourseData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "CourseData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.READ, ModelOperation.UPDATE, ModelOperation.DELETE }),
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ }),
   @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ, ModelOperation.UPDATE })
 })
 public final class CourseData implements Model {
@@ -32,7 +33,10 @@ public final class CourseData implements Model {
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String courseCode;
   private final @ModelField(targetType="String", isRequired = true) String name;
+  private final @ModelField(targetType="UserCourse") @HasMany(associatedWith = "course", type = UserCourse.class) List<UserCourse> users = null;
   private final @ModelField(targetType="Int", isRequired = true) Integer credits;
+  private final @ModelField(targetType="CardData") @HasMany(associatedWith = "course", type = CardData.class) List<CardData> cards = null;
+  private final @ModelField(targetType="QuizData") @HasMany(associatedWith = "course", type = QuizData.class) List<QuizData> quizzes = null;
   public String getId() {
       return id;
   }
@@ -45,8 +49,20 @@ public final class CourseData implements Model {
       return name;
   }
   
+  public List<UserCourse> getUsers() {
+      return users;
+  }
+  
   public Integer getCredits() {
       return credits;
+  }
+  
+  public List<CardData> getCards() {
+      return cards;
+  }
+  
+  public List<QuizData> getQuizzes() {
+      return quizzes;
   }
   
   private CourseData(String id, String courseCode, String name, Integer credits) {
