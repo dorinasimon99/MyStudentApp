@@ -4,32 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="20dp">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_course"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="70dp"
-        android:paddingHorizontal="15dp"
-        android:textSize="26sp"
-        android:textStyle="bold"/>
+    android:layout_marginHorizontal="10dp">
 
     <Button
         android:id="@+id/btnSelectCourse"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginTop="@dimen/appbarmargin"
+        android:layout_marginBottom="10dp"
+        android:drawableEnd="@drawable/ic_baseline_search_24"
+        android:drawablePadding="5dp"
         android:text="@string/select_course_from_list"
-        android:textStyle="normal"
         android:textAllCaps="false"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:drawableStart="@drawable/ic_baseline_search_24"
-        android:layout_marginVertical="10dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etNewCourseName"
@@ -38,26 +27,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSelectCourse"
-        android:hint="@string/add_course_name" />
+        android:hint="@string/add_course_name"
+        style="@style/Widget.StudentApp.EditText"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="30dp"
         android:orientation="horizontal"
+        android:weightSum="6"
         app:layout_constraintTop_toBottomOf="@+id/etNewCourseName">
 
         <NumberPicker
             android:id="@+id/dayPicker"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
+            android:layout_weight="2"
+            android:layout_height="150dp"
+            style="@style/Widget.StudentApp.NumberPicker" />
 
-        <TimePicker
-            android:id="@+id/tpCourseTime"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tvCourseTime"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:timePickerMode="spinner"/>
+            android:hint="@string/press_button_to_select_time"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"/>
+
+        <ImageButton
+            android:id="@+id/btnSelectTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_more_time_24"
+            android:layout_gravity="center"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
 
     </LinearLayout>
 
@@ -65,10 +70,12 @@
         android:id="@+id/etNewCourseCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:hint="@string/add_course_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        style="@style/Widget.StudentApp.EditText" />
 
     <NumberPicker
         android:id="@+id/numpickerCredit"
@@ -76,28 +83,31 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNewCourseCode"/>
+        app:layout_constraintTop_toBottomOf="@+id/etNewCourseCode"
+        style="@style/Widget.StudentApp.NumberPicker"/>
 
     <Button
         android:id="@+id/btnOk"
+        style="@style/Widget.StudentApp.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ok"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numpickerCredit"
         android:layout_marginEnd="50dp"
+        android:text="@string/ok"
         android:textSize="20sp"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numpickerCredit" />
 
     <Button
         android:id="@+id/btnCancel"
+        style="@style/Widget.StudentApp.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numpickerCredit"
         android:layout_marginStart="50dp"
+        android:text="@string/cancel"
         android:textSize="20sp"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numpickerCredit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

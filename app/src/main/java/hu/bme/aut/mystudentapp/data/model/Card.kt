@@ -1,15 +1,19 @@
 package hu.bme.aut.mystudentapp.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.amplifyframework.datastore.generated.model.CardData
 import com.amplifyframework.datastore.generated.model.CourseData
 import com.amplifyframework.datastore.generated.model.UserData
 
+@Entity(tableName = "card")
 data class Card(
-    val id: String,
-    val owner: UserData,
-    val course: CourseData,
-    var questions: List<String>?,
-    var answers: List<String>?){
+    @PrimaryKey(autoGenerate = false) @ColumnInfo(name = "cardId") val id: String,
+    @ColumnInfo(name = "cardOwner") val owner: UserData,
+    @ColumnInfo(name = "cardCourse") val course: CourseData,
+    @ColumnInfo(name = "cardQuestions") var questions: List<String>?,
+    @ColumnInfo(name = "cardAnswers") var answers: List<String>?){
 
     val data : CardData
         get() = CardData.builder()

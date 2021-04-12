@@ -22,14 +22,13 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the QuizData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "QuizData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ }),
-  @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ, ModelOperation.UPDATE })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE })
 })
 @Index(name = "byUser", fields = {"ownerID"})
 @Index(name = "byCourse", fields = {"courseID"})
 public final class QuizData implements Model {
-  public static final QueryField ID = field("id");
-  public static final QueryField OWNER = field( "ownerID");
+  public static final QueryField ID = field( "id");
+  public static final QueryField OWNER = field("ownerID");
   public static final QueryField COURSE = field("courseID");
   public static final QueryField QUIZ_QUESTIONS = field("quizQuestions");
   public static final QueryField QUIZ_ANSWERS = field("quizAnswers");

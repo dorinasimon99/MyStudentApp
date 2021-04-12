@@ -1,12 +1,101 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="backgroundColor">@color/colorBackground</item>
+    </style>
+
+    <style name="Widget.StudentApp.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorAccent</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="Widget.StudentApp.EditText" parent="Widget.AppCompat.EditText">
+        <item name="hintTextAppearance">@style/TextAppearance.StudentApp.TextView.HintText</item>
+        <item name="hintTextColor">@color/textColorPrimary</item>
+        <item name="android:padding">10dp</item>
+        <item name="backgroundTint">@color/colorPrimaryDark</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+
+    <style name="TextAppearance.StudentApp.TextView.HintText" parent="TextAppearance.AppCompat.Display1">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Widget.StudentApp.Button.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">@color/colorSecondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.StudentApp.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="drawableTint">@color/colorSecondaryDark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.StudentApp.Button" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.StudentApp.NavigationView" parent="Widget.Design.NavigationView">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="itemTextColor">@color/colorPrimaryDark</item>
+        <item name="itemIconTint">@color/colorSecondaryDark</item>
+    </style>
+
+    <style name="TextAppearance.StudentApp.Headline" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.StudentApp.NumberPicker" parent="AppTheme">
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="android:selectionDividerHeight">0dp</item>
+    </style>
+
+    <style name="Widget.StudentApp.TimePicker" parent="Widget.MaterialComponents.TimePicker">
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="Widget.StudentApp.SignInButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">@color/colorSecondary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:paddingHorizontal">30dp</item>
+        <item name="android:rotation">-6</item>
+        <item name="android:elevation">12dp</item>
+    </style>
+
+    <style name="Widget.StudentApp.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:indeterminateTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="Widget.StudentApp.CompoundButton.RadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="Widget.StudentApp.FloatingActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">@color/colorSecondary</item>
+        <item name="fabCustomSize">60dp</item>
+        <item name="fabSize">auto</item>
+    </style>
+
+    <style name="Widget.StudentApp.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
     </style>
 
 </resources>

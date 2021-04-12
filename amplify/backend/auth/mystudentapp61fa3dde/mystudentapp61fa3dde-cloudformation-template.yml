@@ -165,19 +165,26 @@ Parameters:
     Type: String
   
             
-  hostedUIProviderCreds:
+  adminQueryGroup:
     Type: String
   
-            
-  oAuthMetadata:
-    Type: String
-  
-            
             
         
   authProviders:
     Type: CommaDelimitedList
       
+  hostedUIProviderCreds:
+    Type: String
+  
+            
+  
+  thirdPartyAuth:
+    Type: String
+            
+  oAuthMetadata:
+    Type: String
+  
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
   
@@ -279,9 +286,6 @@ Resources:
     Properties:
       ClientName: mystud61fa3dde_app_clientWeb
       
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
-      
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
     DependsOn: UserPool
@@ -291,9 +295,6 @@ Resources:
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: mystud61fa3dde_app_client
-      
-      ReadAttributes: !Ref userpoolClientReadAttributes
-      WriteAttributes: !Ref userpoolClientWriteAttributes
       
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
@@ -765,7 +766,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties:
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'mystudentapp61fa3dde_identitypool_c0b02c1b', !Join ['',['mystudentapp61fa3dde_identitypool_c0b02c1b', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'mystudentappe073f54e_identitypool_e073f54e', !Join ['',['mystudentappe073f54e_identitypool_e073f54e', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

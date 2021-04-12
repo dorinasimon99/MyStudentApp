@@ -1,7 +1,10 @@
-package hu.bme.aut.mystudentapp.ui.courses
+package hu.bme.aut.mystudentapp.ui.courses.addcourse
 
+import android.content.Context
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
+import hu.bme.aut.mystudentapp.data.LocalDatabase
 import hu.bme.aut.mystudentapp.data.model.Course
+import hu.bme.aut.mystudentapp.ui.courses.*
 import java.lang.Exception
 import javax.inject.Inject
 

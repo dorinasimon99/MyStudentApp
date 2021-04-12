@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingVertical="20dp">
+
 
     <Button
         android:id="@+id/btnClassName"
@@ -26,7 +28,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/tvClassCode"
@@ -34,15 +37,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:textStyle="italic"/>
-
+            android:textStyle="italic"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/tvClassCredit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 

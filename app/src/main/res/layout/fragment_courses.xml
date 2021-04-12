@@ -2,10 +2,16 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="70dp">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/content_courses" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/appbarmargin">
+
+        <include layout="@layout/content_courses" />
+
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddCourse"
@@ -15,8 +21,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/ic_baseline_add_24"
-        app:fabCustomSize="60dp"
-        app:fabSize="auto"
-        android:contentDescription="AddCourse" />
+        style="@style/Widget.StudentApp.FloatingActionButton"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

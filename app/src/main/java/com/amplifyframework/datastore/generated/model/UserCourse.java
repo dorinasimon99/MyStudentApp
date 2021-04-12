@@ -22,11 +22,11 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the UserCourse type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "UserCourses", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE })
 })
 public final class UserCourse implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField USER = field( "userCourseUserId");
+  public static final QueryField USER = field("userCourseUserId");
   public static final QueryField COURSE = field("userCourseCourseId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="UserData", isRequired = true) @BelongsTo(targetName = "userCourseUserId", type = UserData.class) UserData user;

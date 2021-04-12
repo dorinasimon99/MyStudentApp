@@ -43,12 +43,10 @@ import com.amplifyframework.datastore.generated.model.UserData
 import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
 import com.google.gson.Gson
-import hu.bme.aut.mystudentapp.data.model.AddUserToGroupModel
-import hu.bme.aut.mystudentapp.data.model.Course
-import hu.bme.aut.mystudentapp.data.model.Role
-import hu.bme.aut.mystudentapp.data.model.User
+import hu.bme.aut.mystudentapp.data.model.*
 import okhttp3.FormBody
 import org.json.JSONObject
+import java.util.*
 
 object NetworkBackend {
 
@@ -84,7 +82,7 @@ object NetworkBackend {
                         AuthChannelEventName.SIGNED_IN -> {
                             updateUserData(true)
                             Log.i(TAG, "HUB : SIGNED_IN")
-                        }
+                    }
                         AuthChannelEventName.SIGNED_OUT -> {
                             updateUserData(false)
                             Log.i(TAG, "HUB : SIGNED_OUT")
@@ -120,7 +118,7 @@ object NetworkBackend {
         return this
     }
 
-    fun updateUserData(withSignedInStatus: Boolean) {
+    private fun updateUserData(withSignedInStatus: Boolean) {
         UserDataBackend.setSignedIn(withSignedInStatus)
         userData = withSignedInStatus
 
@@ -155,65 +153,4 @@ object NetworkBackend {
             Amplify.Auth.handleWebUISignInResponse(data)
         }
     }
-
-    fun createCourse(c: Course) {
-        Log.i(TAG, "Creating course")
-
-        Amplify.API.mutate(
-            ModelMutation.create(c.data),
-            { response ->
-                Log.i(TAG, "Course created")
-                if(response.hasErrors()){
-                    Log.e(TAG, response.errors.first().message)
-                } else {
-                    Log.i(TAG, "Created course with name: " + response.data.name)
-                }
-            },
-            { error -> Log.e(TAG, "Course create failed", error)}
-        )
-    }
-
-    private fun getCourseForUser(courseId: String) : Boolean {
-        var isCorrectCourse = false
-        Amplify.API.query(
-            ModelQuery.get(UserCourse::class.java, courseId),
-            { response ->
-                Log.i(TAG, "get courses for user")
-                if (response.data != null && response.data.course.id == courseId && response.data.user.id == UserDataBackend.currentUser.id) {
-                    isCorrectCourse = true
-                }
-            },
-            { error -> Log.e("UserDataBackend", "Get course for user failed: ", error) }
-        )
-        return isCorrectCourse
-    }
-
-    fun getCourses() {
-        Amplify.API.query(
-            ModelQuery.list(CourseData::class.java),
-            { response ->
-                Log.i("UserDataBackend", "Courses queried")
-                for (courseData in response.data) {
-                    if (getCourseForUser(courseData.id)) {
-                        UserDataBackend.addCourse(Course.from(courseData))
-                    }
-                }
-            },
-            { error -> Log.e("UserDataBackend", "Courses query failure:", error) }
-        )
-    }
-
-    fun getAllCourses(){
-        Amplify.API.query(
-            ModelQuery.list(CourseData::class.java),
-            { response ->
-                Log.i(TAG, "Queried all courses")
-                for (courseData in response.data) {
-                    UserDataBackend.addCourse(Course.from(courseData))
-                }
-            },
-            { error -> Log.e(TAG, "All courses query failure:", error) }
-        )
-    }
-
 }

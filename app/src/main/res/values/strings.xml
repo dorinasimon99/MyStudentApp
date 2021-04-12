@@ -4,9 +4,7 @@
     <string name="email_hint">username@something.com</string>
     <string name="password">Password:</string>
     <string name="password_hint">password</string>
-    <string name="signin_student">Sign in as student</string>
-    <string name="signin_teacher">Sign in as teacher</string>
-    <string name="signin">Sign in</string>
+    <string name="signin">Sign in or sign up</string>
     <string name="classes">Classes</string>
     <string name="schedule">Schedule</string>
     <string name="progress">Progress</string>
@@ -28,6 +26,11 @@
     <string name="add_course_name">Add course name</string>
     <string name="add_course_code">Add course code</string>
     <string name="cancel">Cancel</string>
+    <string name="course_code">Course code:</string>
+    <string name="teachers">Teachers:</string>
+    <string name="todos">Todos:</string>
+    <string name="statistics">Statistics</string>
+    <string name="press_button_to_select_time">Press button to select time</string>
     <string-array name="weekdays">
         <item>Monday</item>
         <item>Tuesday</item>

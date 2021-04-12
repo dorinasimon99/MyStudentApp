@@ -14,10 +14,13 @@ import androidx.navigation.Navigation
 import com.google.android.material.navigation.NavigationView
 import hu.bme.aut.mystudentapp.backend.NetworkBackend
 import hu.bme.aut.mystudentapp.backend.UserDataBackend
+import hu.bme.aut.mystudentapp.data.model.Course
 import hu.bme.aut.mystudentapp.data.model.Role
+import hu.bme.aut.mystudentapp.ui.courses.addcourse.AddCourseFragment
 import hu.mystudentapp.R
+import kotlinx.coroutines.delay
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AddCourseFragment.NewCourseFragmentListener {
 
     private lateinit var drawer : DrawerLayout
     private lateinit var toggle : ActionBarDrawerToggle
@@ -46,12 +49,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onStart()
 
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        navController.navigate(R.id.loadingFragment)
-
+        navController.navigate(R.id.mainScreenFragment)
 
         UserDataBackend.isSignedIn.observe(this, Observer<Boolean> { isSignedUp ->
             Log.i(TAG, "isSignedIn changed : $isSignedUp")
 
+            Thread.sleep(2000)
             if (isSignedUp) {
                 val data = UserDataBackend.getUserData()
                 if (data == null) {
@@ -108,5 +111,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onCourseCreated(newCourse: Course) {
+
     }
 }

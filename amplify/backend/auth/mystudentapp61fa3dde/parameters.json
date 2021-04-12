@@ -1,5 +1,5 @@
 {
-    "identityPoolName": "mystudentapp61fa3dde_identitypool_c0b02c1b",
+    "identityPoolName": "mystudentappe073f54e_identitypool_e073f54e",
     "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "mystud61fa3dde",
     "userPoolName": "mystudentapp61fa3dde_userpool_61fa3dde",
@@ -29,7 +29,7 @@
         "email"
     ],
     "userpoolClientLambdaRole": "mystud61fa3dde_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": true,
+    "userpoolClientSetAttributes": false,
     "sharedId": "61fa3dde",
     "resourceName": "mystudentapp61fa3dde",
     "authSelections": "identityPoolAndUserPool",
@@ -45,10 +45,12 @@
             "Arn"
         ]
     },
-    "useDefault": "defaultSocial",
+    "useDefault": "manual",
     "hostedUI": true,
     "triggers": "{}",
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+        "users"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "parentStack": {
@@ -58,9 +60,11 @@
     "dependsOn": [],
     "userPoolGroups": false,
     "adminQueries": false,
-    "hostedUIDomainName": "mystudentapp0711db1f-0711db1f",
+    "hostedUIDomainName": "mystudentapp8082e7f6-8082e7f6",
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\"],\"CallbackURLs\":[\"studentapp://\"],\"LogoutURLs\":[\"studentapp://\"]}",
-    "authProviders": []
+    "adminQueryGroup": "users",
+    "authProviders": [],
+    "thirdPartyAuth": false,
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"studentapp://\"],\"LogoutURLs\":[\"studentapp://\"]}"
 }

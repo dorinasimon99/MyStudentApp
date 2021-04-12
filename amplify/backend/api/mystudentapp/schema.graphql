@@ -1,6 +1,6 @@
 type UserData
 @model
-@auth(rules: [ { allow: owner }])
+@auth(rules: [ { allow: owner, operations: [create, update, delete] }])
 {
   id: ID!
   name: String
@@ -13,7 +13,7 @@ type UserData
 
 type CourseData
 @model
-@auth(rules: [ { allow: owner } { allow: groups, groups: ["users"], operations: [read, update]} ])
+@auth(rules: [ { allow: owner, operations: [create, delete] } ])
 {
   id: ID!
   courseCode: String!
@@ -22,11 +22,12 @@ type CourseData
   credits: Int!
   cards: [CardData] @connection(keyName: "byCourse", fields: ["id"])
   quizzes: [QuizData] @connection(keyName: "byCourse", fields: ["id"])
+  time: String!
 }
 
 type UserCourse
 @model
-@auth (rules: [ { allow : owner } ])
+@auth (rules: [ { allow : owner, operations: [create, update, delete] } ])
 {
   id: ID!
   user: UserData! @connection(name: "UserCourses")
@@ -36,7 +37,7 @@ type UserCourse
 
 type CardData
 @model
-@auth(rules: [ { allow: owner } { allow: groups, groups: ["users"], operations: [read, update]} ]) 
+@auth(rules: [ { allow: owner, operations: [create, delete] } ]) 
 @key(name: "byUser", fields: ["ownerID"]) @key(name: "byCourse", fields: ["courseID"])
 {
   id: ID!
@@ -50,7 +51,7 @@ type CardData
 
 type QuizData
 @model
-@auth(rules: [ { allow: owner } { allow: groups, groups: ["users"], operations: [read, update]} ])
+@auth(rules: [ { allow: owner, operations: [create, update, delete] } ])
 @key(name: "byUser", fields: ["ownerID"]) @key(name: "byCourse", fields: ["courseID"])
 {
   id: ID!

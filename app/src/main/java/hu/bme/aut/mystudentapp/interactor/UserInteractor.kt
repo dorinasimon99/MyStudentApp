@@ -3,7 +3,11 @@ package hu.bme.aut.mystudentapp.interactor
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
+import com.amplifyframework.core.Amplify
+import hu.bme.aut.mystudentapp.backend.NetworkBackend
 import hu.bme.aut.mystudentapp.data.NetworkDataSource
 import hu.bme.aut.mystudentapp.data.UserDataSource
 import hu.bme.aut.mystudentapp.data.model.User
@@ -33,9 +37,9 @@ class UserInteractor @Inject constructor(
         networkDataSource.initialize(applicationContext)
     }
 
-    suspend fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*suspend fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
         networkDataSource.handleWebUISignInResponse(requestCode, resultCode, data)
-    }
+    }*/
 
     suspend fun signOut() {
         networkDataSource.signOut()
@@ -44,5 +48,21 @@ class UserInteractor @Inject constructor(
     suspend fun signIn(callingActivity: Activity) {
         networkDataSource.signIn(callingActivity)
         userDatasource.setSignedIn(networkDataSource.updateUserData())
+    }
+
+    suspend fun loadRates() {
+        userDatasource.loadRates()
+    }
+
+    suspend fun loadComments(){
+        userDatasource.loadComments()
+    }
+
+    // pass the data from web redirect to Amplify libs
+    fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("UserInteractor", "received requestCode : $requestCode and resultCode : $resultCode")
+        if (requestCode == AWSCognitoAuthPlugin.WEB_UI_SIGN_IN_ACTIVITY_CODE) {
+            Amplify.Auth.handleWebUISignInResponse(data)
+        }
     }
 }

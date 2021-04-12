@@ -8,20 +8,12 @@
     android:orientation="vertical"
     android:id="@+id/studentMain">
 
-    <TextView
-        android:id="@+id/tvWelcomeStudent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:text="@string/welcome"
-        android:layout_marginTop="70dp"
-        android:gravity="center_horizontal"/>
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/appbarmargin">
 
             <Button
                 android:id="@+id/btnClasses"
@@ -32,7 +24,7 @@
                 android:drawableTop="@drawable/ic_baseline_class_96"
                 android:text="@string/classes"
                 android:padding="30dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/Widget.StudentApp.Button.Borderless.Colored"
                 tools:ignore="NestedWeights" />
 
             <Button
@@ -44,7 +36,7 @@
                 android:drawableTop="@drawable/ic_baseline_schedule_96"
                 android:text="@string/schedule"
                 android:padding="30dp"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
         </LinearLayout>
 
@@ -63,7 +55,7 @@
                 android:drawableTop="@drawable/ic_baseline_account_tree_96"
                 android:text="Progress"
                 android:padding="30dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/Widget.StudentApp.Button.Borderless.Colored"
                 tools:ignore="NestedWeights" />
 
             <Button
@@ -73,9 +65,9 @@
                 android:layout_weight="1"
                 android:layout_marginHorizontal="5dp"
                 android:drawableTop="@drawable/ic_baseline_timeline_96"
-                android:text="@string/analytics"
+                android:text="@string/statistics"
                 android:padding="30dp"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
         </LinearLayout>
 
@@ -94,7 +86,7 @@
                 android:drawableTop="@drawable/ic_baseline_article_96"
                 android:text="@string/study_cards"
                 android:padding="30dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                style="@style/Widget.StudentApp.Button.Borderless.Colored"
                 tools:ignore="NestedWeights" />
 
             <Button
@@ -106,7 +98,7 @@
                 android:drawableTop="@drawable/ic_baseline_today_96"
                 android:text="@string/today"
                 android:padding="30dp"
-                style="@style/Widget.AppCompat.Button.Borderless"/>
+                style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
         </LinearLayout>
 

@@ -14,17 +14,25 @@ import javax.inject.Singleton
 class UserDataSource @Inject constructor(){
     var isSignedIn : LiveData<Boolean> = UserDataBackend.isSignedIn
 
-    fun setSignedIn(newValue: Boolean){
+    suspend fun setSignedIn(newValue: Boolean){
         UserDataBackend.setSignedIn(newValue)
     }
 
     var hasUserData : LiveData<User> = UserDataBackend.hasUserData
 
-    fun getUserData() : User? {
+    suspend fun getUserData() : User? {
         return UserDataBackend.getUserData()
     }
 
-    fun setUserData(user: User){
+    suspend fun setUserData(user: User){
         UserDataBackend.setUserData(user)
+    }
+
+    suspend fun loadRates(){
+        UserDataBackend.getRates()
+    }
+
+    suspend fun loadComments(){
+        UserDataBackend.getComments()
     }
 }

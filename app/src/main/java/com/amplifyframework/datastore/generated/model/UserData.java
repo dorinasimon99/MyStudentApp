@@ -22,13 +22,13 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the UserData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "UserData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE })
 })
 public final class UserData implements Model {
   public static final QueryField ID = field("id");
-  public static final QueryField NAME = field("name");
+  public static final QueryField NAME = field( "name");
   public static final QueryField ROLE = field("role");
-  public static final QueryField GRADE = field("grade");
+  public static final QueryField GRADE = field( "grade");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="String", isRequired = true) String role;

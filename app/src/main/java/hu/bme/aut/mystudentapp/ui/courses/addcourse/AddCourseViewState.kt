@@ -1,4 +1,4 @@
-package hu.bme.aut.mystudentapp.ui.courses
+package hu.bme.aut.mystudentapp.ui.courses.addcourse
 
 sealed class AddCourseViewState
 

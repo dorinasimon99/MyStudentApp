@@ -1,15 +1,20 @@
 package hu.bme.aut.mystudentapp.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.amplifyframework.datastore.generated.model.UserData
 
+@Entity(tableName = "user")
 data class User(
-    val id: String,
-    val name: String?,
-    val role: String,
-    val grade: Int?,
-    var courses: List<Course>?,
-    var cards: List<Card>?,
-    var quizzes: List<Quiz>?){
+    @ColumnInfo(name = "userId") @PrimaryKey(autoGenerate = false) val id: String,
+    @ColumnInfo(name = "userName") var name: String? = null,
+    @ColumnInfo(name = "userRole") val role: String,
+    @ColumnInfo(name = "userGrade") var grade: Int? = null,
+    @ColumnInfo(name = "userCourses") var courses: List<Course>? = null,
+    @ColumnInfo(name = "userCards") var cards: List<Card>? = null,
+    @ColumnInfo(name = "userQuizzes") var quizzes: List<Quiz>? = null,
+    @ColumnInfo(name = "userTeacherRates") var teacherRates: List<TeacherRate>? = null){
     val data : UserData
         get() = UserData.builder()
             .role(this.role)

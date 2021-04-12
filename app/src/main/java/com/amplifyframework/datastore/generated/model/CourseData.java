@@ -22,14 +22,14 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the CourseData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "CourseData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ }),
-  @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ, ModelOperation.UPDATE })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.DELETE })
 })
 public final class CourseData implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField COURSE_CODE = field("courseCode");
   public static final QueryField NAME = field("name");
   public static final QueryField CREDITS = field("credits");
+  public static final QueryField TIME = field( "time");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String courseCode;
   private final @ModelField(targetType="String", isRequired = true) String name;
@@ -37,6 +37,7 @@ public final class CourseData implements Model {
   private final @ModelField(targetType="Int", isRequired = true) Integer credits;
   private final @ModelField(targetType="CardData") @HasMany(associatedWith = "course", type = CardData.class) List<CardData> cards = null;
   private final @ModelField(targetType="QuizData") @HasMany(associatedWith = "course", type = QuizData.class) List<QuizData> quizzes = null;
+  private final @ModelField(targetType="String", isRequired = true) String time;
   public String getId() {
       return id;
   }
@@ -65,11 +66,16 @@ public final class CourseData implements Model {
       return quizzes;
   }
   
-  private CourseData(String id, String courseCode, String name, Integer credits) {
+  public String getTime() {
+      return time;
+  }
+  
+  private CourseData(String id, String courseCode, String name, Integer credits, String time) {
     this.id = id;
     this.courseCode = courseCode;
     this.name = name;
     this.credits = credits;
+    this.time = time;
   }
   
   @Override
@@ -83,7 +89,8 @@ public final class CourseData implements Model {
       return ObjectsCompat.equals(getId(), courseData.getId()) &&
               ObjectsCompat.equals(getCourseCode(), courseData.getCourseCode()) &&
               ObjectsCompat.equals(getName(), courseData.getName()) &&
-              ObjectsCompat.equals(getCredits(), courseData.getCredits());
+              ObjectsCompat.equals(getCredits(), courseData.getCredits()) &&
+              ObjectsCompat.equals(getTime(), courseData.getTime());
       }
   }
   
@@ -94,6 +101,7 @@ public final class CourseData implements Model {
       .append(getCourseCode())
       .append(getName())
       .append(getCredits())
+      .append(getTime())
       .toString()
       .hashCode();
   }
@@ -105,7 +113,8 @@ public final class CourseData implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("courseCode=" + String.valueOf(getCourseCode()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
-      .append("credits=" + String.valueOf(getCredits()))
+      .append("credits=" + String.valueOf(getCredits()) + ", ")
+      .append("time=" + String.valueOf(getTime()))
       .append("}")
       .toString();
   }
@@ -137,6 +146,7 @@ public final class CourseData implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -145,7 +155,8 @@ public final class CourseData implements Model {
     return new CopyOfBuilder(id,
       courseCode,
       name,
-      credits);
+      credits,
+      time);
   }
   public interface CourseCodeStep {
     NameStep courseCode(String courseCode);
@@ -158,7 +169,12 @@ public final class CourseData implements Model {
   
 
   public interface CreditsStep {
-    BuildStep credits(Integer credits);
+    TimeStep credits(Integer credits);
+  }
+  
+
+  public interface TimeStep {
+    BuildStep time(String time);
   }
   
 
@@ -168,11 +184,12 @@ public final class CourseData implements Model {
   }
   
 
-  public static class Builder implements CourseCodeStep, NameStep, CreditsStep, BuildStep {
+  public static class Builder implements CourseCodeStep, NameStep, CreditsStep, TimeStep, BuildStep {
     private String id;
     private String courseCode;
     private String name;
     private Integer credits;
+    private String time;
     @Override
      public CourseData build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -181,7 +198,8 @@ public final class CourseData implements Model {
           id,
           courseCode,
           name,
-          credits);
+          credits,
+          time);
     }
     
     @Override
@@ -199,9 +217,16 @@ public final class CourseData implements Model {
     }
     
     @Override
-     public BuildStep credits(Integer credits) {
+     public TimeStep credits(Integer credits) {
         Objects.requireNonNull(credits);
         this.credits = credits;
+        return this;
+    }
+    
+    @Override
+     public BuildStep time(String time) {
+        Objects.requireNonNull(time);
+        this.time = time;
         return this;
     }
     
@@ -228,11 +253,12 @@ public final class CourseData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String courseCode, String name, Integer credits) {
+    private CopyOfBuilder(String id, String courseCode, String name, Integer credits, String time) {
       super.id(id);
       super.courseCode(courseCode)
         .name(name)
-        .credits(credits);
+        .credits(credits)
+        .time(time);
     }
     
     @Override
@@ -248,6 +274,11 @@ public final class CourseData implements Model {
     @Override
      public CopyOfBuilder credits(Integer credits) {
       return (CopyOfBuilder) super.credits(credits);
+    }
+    
+    @Override
+     public CopyOfBuilder time(String time) {
+      return (CopyOfBuilder) super.time(time);
     }
   }
   

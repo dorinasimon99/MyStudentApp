@@ -22,8 +22,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the CardData type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "CardData", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ }),
-  @AuthRule(allow = AuthStrategy.GROUPS, groupClaim = "cognito:groups", groups = { "users" }, operations = { ModelOperation.READ, ModelOperation.UPDATE })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.DELETE })
 })
 @Index(name = "byUser", fields = {"ownerID"})
 @Index(name = "byCourse", fields = {"courseID"})
@@ -32,7 +31,7 @@ public final class CardData implements Model {
   public static final QueryField OWNER = field("ownerID");
   public static final QueryField COURSE = field("courseID");
   public static final QueryField CARD_QUESTIONS = field("cardQuestions");
-  public static final QueryField CARD_ANSWERS = field( "cardAnswers");
+  public static final QueryField CARD_ANSWERS = field("cardAnswers");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="UserData") @BelongsTo(targetName = "ownerID", type = UserData.class) UserData owner;
   private final @ModelField(targetType="CourseData") @BelongsTo(targetName = "courseID", type = CourseData.class) CourseData course;

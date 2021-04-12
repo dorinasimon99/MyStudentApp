@@ -11,9 +11,6 @@ mutation CreateUserData(
     courses {
       items {
         id
-        courseCode
-        name
-        credits
         createdAt
         updatedAt
         owner
@@ -61,9 +58,6 @@ mutation UpdateUserData(
     courses {
       items {
         id
-        courseCode
-        name
-        credits
         createdAt
         updatedAt
         owner
@@ -111,9 +105,6 @@ mutation DeleteUserData(
     courses {
       items {
         id
-        courseCode
-        name
-        credits
         createdAt
         updatedAt
         owner
@@ -160,9 +151,6 @@ mutation CreateCourseData(
     users {
       items {
         id
-        name
-        role
-        grade
         createdAt
         updatedAt
         owner
@@ -194,6 +182,7 @@ mutation CreateCourseData(
       }
       nextToken
     }
+    time
     createdAt
     updatedAt
     owner
@@ -210,9 +199,6 @@ mutation UpdateCourseData(
     users {
       items {
         id
-        name
-        role
-        grade
         createdAt
         updatedAt
         owner
@@ -244,6 +230,7 @@ mutation UpdateCourseData(
       }
       nextToken
     }
+    time
     createdAt
     updatedAt
     owner
@@ -260,9 +247,6 @@ mutation DeleteCourseData(
     users {
       items {
         id
-        name
-        role
-        grade
         createdAt
         updatedAt
         owner
@@ -293,6 +277,151 @@ mutation DeleteCourseData(
         updatedAt
       }
       nextToken
+    }
+    time
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation CreateUserCourse(
+  $input: CreateUserCourseInput!
+  $condition: ModelUserCourseConditionInput
+) {
+  createUserCourse(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      name
+      role
+      grade
+      courses {
+        nextToken
+      }
+      cards {
+        nextToken
+      }
+      quizzes {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        nextToken
+      }
+      credits
+      cards {
+        nextToken
+      }
+      quizzes {
+        nextToken
+      }
+      time
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateUserCourse(
+  $input: UpdateUserCourseInput!
+  $condition: ModelUserCourseConditionInput
+) {
+  updateUserCourse(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      name
+      role
+      grade
+      courses {
+        nextToken
+      }
+      cards {
+        nextToken
+      }
+      quizzes {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        nextToken
+      }
+      credits
+      cards {
+        nextToken
+      }
+      quizzes {
+        nextToken
+      }
+      time
+      createdAt
+      updatedAt
+      owner
+    }
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteUserCourse(
+  $input: DeleteUserCourseInput!
+  $condition: ModelUserCourseConditionInput
+) {
+  deleteUserCourse(input: $input, condition: $condition) {
+    id
+    user {
+      id
+      name
+      role
+      grade
+      courses {
+        nextToken
+      }
+      cards {
+        nextToken
+      }
+      quizzes {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+    course {
+      id
+      courseCode
+      name
+      users {
+        nextToken
+      }
+      credits
+      cards {
+        nextToken
+      }
+      quizzes {
+        nextToken
+      }
+      time
+      createdAt
+      updatedAt
+      owner
     }
     createdAt
     updatedAt
@@ -339,6 +468,7 @@ mutation CreateCardData(
       quizzes {
         nextToken
       }
+      time
       createdAt
       updatedAt
       owner
@@ -389,6 +519,7 @@ mutation UpdateCardData(
       quizzes {
         nextToken
       }
+      time
       createdAt
       updatedAt
       owner
@@ -439,6 +570,7 @@ mutation DeleteCardData(
       quizzes {
         nextToken
       }
+      time
       createdAt
       updatedAt
       owner
@@ -489,6 +621,7 @@ mutation CreateQuizData(
       quizzes {
         nextToken
       }
+      time
       createdAt
       updatedAt
       owner
@@ -539,6 +672,7 @@ mutation UpdateQuizData(
       quizzes {
         nextToken
       }
+      time
       createdAt
       updatedAt
       owner
@@ -589,6 +723,7 @@ mutation DeleteQuizData(
       quizzes {
         nextToken
       }
+      time
       createdAt
       updatedAt
       owner
