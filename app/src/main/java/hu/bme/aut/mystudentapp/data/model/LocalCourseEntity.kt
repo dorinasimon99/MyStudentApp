@@ -10,4 +10,5 @@ data class LocalCourseEntity(
     @ColumnInfo(name = "courseCode") val courseCode: String,
     @ColumnInfo(name = "courseName") val name: String,
     @ColumnInfo(name = "courseCredits") val credits: Int,
-    @ColumnInfo(name = "courseTime") var time: String? = null)
+    @ColumnInfo(name = "courseTime") var time: String? = null,
+    @ColumnInfo(name = "ownerId") var ownerId: String? = null)

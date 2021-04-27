@@ -21,6 +21,7 @@ data class Course(
             .credits(this.credits)
             .time(this.time)
             .id(this.id)
+            .teachers(this.teachers)
             .build()
 
     companion object{

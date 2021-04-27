@@ -7,6 +7,11 @@ import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
 import hu.bme.aut.mystudentapp.backend.NetworkBackend
+import hu.bme.aut.mystudentapp.backend.UserDataBackend
+import hu.bme.aut.mystudentapp.data.model.LocalUserData
+import hu.bme.aut.mystudentapp.data.model.User
+import hu.bme.aut.mystudentapp.ui.main.MainScreenError
+import kotlinx.coroutines.flow.collect
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -14,20 +19,48 @@ class SignInScreenViewModel @Inject constructor(
     private val signInScreenPresenter: SignInScreenPresenter
 ) : RainbowCakeViewModel<SignInScreenViewState>(SignInInitial) {
 
-    fun signIn(activity: Activity) = execute {
+    fun signIn(username: String, password: String) = execute {
+        try {
+            signInScreenPresenter.signIn(username, password)
+        } catch (e: Exception) {
+            viewState = SignInError(e)
+        }
         viewState = SignInInitial
-        viewState = try {
-            signInScreenPresenter.signIn(activity)
+        /*try {
             signInScreenPresenter.setSignedIn(true)
-            val user = signInScreenPresenter.getUserData()
-            SignInLoading(user)
         } catch (e: Exception){
-            SignInError
+            viewState = SignInError(Exception("Setting sign in value failed"))
+        }*/
+        /*try {
+            signInScreenPresenter.isSignedIn()
+        } catch (e: Exception){
+            return@execute
+        }*/
+        viewState = SignedIn
+        try {
+            signInScreenPresenter.getUserData(username)
+        } catch (e: Exception) {
+            viewState = SignInError(e)
         }
     }
-    /*fun handleWebUI(requestCode: Int, resultCode: Int, data: Intent?) = execute {
-        signInScreenPresenter.handleWebUISignInResponse(requestCode, resultCode, data)
-    }*/
+
+    fun signUp(username: String, password: String, email: String) = execute {
+        try {
+            signInScreenPresenter.signUp(username, password, email)
+        } catch (e: Exception) {
+            viewState = SignInError(e)
+        }
+        viewState = SignUp
+    }
+
+    fun confirmSignUp(username: String, confirmCode: String, password: String) = execute {
+        try {
+            signInScreenPresenter.confirmSignUp(username, confirmCode, password)
+        } catch (e: Exception) {
+            viewState = SignInError(e)
+        }
+        viewState = ConfirmedSignUp
+    }
 
     // pass the data from web redirect to Amplify libs
     fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {

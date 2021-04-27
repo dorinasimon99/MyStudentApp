@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.amazonaws.auth.AWSCognitoIdentityProvider
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser
 import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserCodeDeliveryDetails
@@ -44,6 +46,8 @@ import com.amplifyframework.hub.HubChannel
 import com.amplifyframework.hub.HubEvent
 import com.google.gson.Gson
 import hu.bme.aut.mystudentapp.data.model.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import okhttp3.FormBody
 import org.json.JSONObject
 import java.util.*
@@ -52,7 +56,7 @@ object NetworkBackend {
 
     private val TAG = "NetworkBackend"
 
-    private var userData = false
+    private var userData : Boolean? = null
 
     fun initialize(applicationContext: Context): NetworkBackend {
         try {
@@ -82,7 +86,7 @@ object NetworkBackend {
                         AuthChannelEventName.SIGNED_IN -> {
                             updateUserData(true)
                             Log.i(TAG, "HUB : SIGNED_IN")
-                    }
+                        }
                         AuthChannelEventName.SIGNED_OUT -> {
                             updateUserData(false)
                             Log.i(TAG, "HUB : SIGNED_OUT")
@@ -121,29 +125,57 @@ object NetworkBackend {
     private fun updateUserData(withSignedInStatus: Boolean) {
         UserDataBackend.setSignedIn(withSignedInStatus)
         userData = withSignedInStatus
-
-        //UserDataBackend.getUserData()
     }
 
-    fun userData() = userData
+    fun userData() = userData!!
 
     fun signOut() {
         Log.i(TAG, "Initiate Signout Sequence")
 
         Amplify.Auth.signOut(
-            { Log.i(TAG, "Signed out!") },
+            {
+                Log.i(TAG, "Signed out!")
+            },
             { error -> Log.e(TAG, error.toString()) }
+        )
+
+    }
+
+    fun signIn(username: String, password: String) {
+        Log.i(TAG, "Initiate Signin Sequence")
+
+        Amplify.Auth.signIn(
+            username,
+            password,
+            {result: AuthSignInResult ->
+                Log.i(TAG, result.toString())},
+            {error: AuthException -> Log.e(TAG, error.toString())}
         )
     }
 
-    fun signIn(callingActivity: Activity) {
-        Log.i(TAG, "Initiate Signin Sequence")
+    fun signUp(username: String, password: String, email: String){
+        Log.i(TAG, "Initiate SignUp Sequence")
 
-        Amplify.Auth.signInWithWebUI(
-            callingActivity,
-            { result: AuthSignInResult -> Log.i(TAG, result.toString()) },
-            { error: AuthException -> Log.e(TAG, error.toString()) }
+        Amplify.Auth.signUp(
+            username,
+            password,
+            AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build(),
+            {result: AuthSignUpResult -> Log.i(TAG, result.toString())},
+            {error: AuthException -> Log.i(TAG, error.toString())}
         )
+    }
+
+    fun confirmSignUp(username: String, confirmCode: String, password: String){
+        Log.i(TAG, "Initiate Confirm SignUp Sequence")
+
+        Amplify.Auth.confirmSignUp(
+            username,
+            confirmCode,
+            {result: AuthSignUpResult -> Log.i(TAG, result.toString())},
+            {error: AuthException -> Log.i(TAG, error.toString())}
+        )
+
+        signIn(username, password)
     }
 
     // pass the data from web redirect to Amplify libs

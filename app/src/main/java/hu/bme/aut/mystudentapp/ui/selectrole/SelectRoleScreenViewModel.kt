@@ -1,5 +1,6 @@
 package hu.bme.aut.mystudentapp.ui.selectrole
 
+import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import hu.bme.aut.mystudentapp.data.model.User
 import java.lang.Exception
@@ -14,6 +15,7 @@ class SelectRoleScreenViewModel @Inject constructor(
             selectRoleScreenPresenter.setUserData(user)
             SelectRole
         }catch (e : Exception){
+            Log.e("SelectRoleScreenViewModel", "error", e)
             SelectRoleError
         }
     }

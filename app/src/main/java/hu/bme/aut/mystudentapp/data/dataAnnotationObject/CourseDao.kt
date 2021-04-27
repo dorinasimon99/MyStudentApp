@@ -9,12 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CourseDao {
-    @Query("SELECT * FROM course")
-    suspend fun getCoursesFromLocalDb() : List<LocalCourseEntity>
+    @Query("SELECT * FROM course WHERE ownerId = :ownerId")
+    suspend fun getCoursesFromLocalDb(ownerId: String) : List<LocalCourseEntity>
 
     @Query("SELECT * FROM course WHERE courseId = :id")
     suspend fun getCourse(id: String) : LocalCourseEntity
 
     @Insert
     suspend fun insert(course: LocalCourseEntity)
+
+    @Query("DELETE FROM course")
+    suspend fun deleteAll()
 }

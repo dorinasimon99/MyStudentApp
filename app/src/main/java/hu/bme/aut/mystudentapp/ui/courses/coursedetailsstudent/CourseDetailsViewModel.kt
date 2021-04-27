@@ -1,6 +1,7 @@
 package hu.bme.aut.mystudentapp.ui.courses.coursedetailsstudent
 
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
+import hu.bme.aut.mystudentapp.data.model.Course
 import hu.bme.aut.mystudentapp.ui.courses.CoursesPresenter
 import kotlinx.coroutines.delay
 import java.lang.Exception
@@ -17,6 +18,11 @@ class CourseDetailsViewModel @Inject constructor(
         } catch (e: Exception) {
             CourseDetailsError
         }
+    }
+
+    fun loadTeachers(course: String) = execute {
+        courseDetailsPresenter.loadTeachers(course)
+        CourseDetailsTeachers
     }
 
     fun deleteTodo(todo: Int) = execute {

@@ -5,23 +5,28 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
+import co.zsmb.rainbowcake.withIOContext
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
 import hu.bme.aut.mystudentapp.backend.NetworkBackend
 import hu.bme.aut.mystudentapp.data.NetworkDataSource
 import hu.bme.aut.mystudentapp.data.UserDataSource
+import hu.bme.aut.mystudentapp.data.model.LocalUserData
 import hu.bme.aut.mystudentapp.data.model.User
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class UserInteractor @Inject constructor(
     private val userDatasource: UserDataSource,
     private val networkDataSource: NetworkDataSource
 ){
-    suspend fun getUserData(): User?{
-        return userDatasource.getUserData()
+    suspend fun getUserData(username: String?) {
+        userDatasource.getUserData(username)
     }
 
-    var isSignedIn: LiveData<Boolean> = userDatasource.isSignedIn
+    suspend fun isSignedIn() : Boolean {
+        return userDatasource.isSignedIn()
+    }
 
     suspend fun setSignedIn(newValue: Boolean) {
         userDatasource.setSignedIn(newValue)
@@ -45,9 +50,10 @@ class UserInteractor @Inject constructor(
         networkDataSource.signOut()
     }
 
-    suspend fun signIn(callingActivity: Activity) {
-        networkDataSource.signIn(callingActivity)
-        userDatasource.setSignedIn(networkDataSource.updateUserData())
+    suspend fun signIn(username: String, password: String) {
+        networkDataSource.signIn(username, password)
+        userDatasource.setLocalUser(username)
+        //userDatasource.setSignedIn(networkDataSource.updateUserData())
     }
 
     suspend fun loadRates() {
@@ -58,11 +64,23 @@ class UserInteractor @Inject constructor(
         userDatasource.loadComments()
     }
 
+    suspend fun getLocalUser() : LocalUserData? {
+        return userDatasource.getLocalUser()
+    }
+
+    suspend fun signUp(username: String, password: String, email: String){
+        networkDataSource.signUp(username, password, email)
+    }
+
+    suspend fun confirmSignUp(username: String, confirmCode: String, password: String){
+        networkDataSource.confirmSignUp(username, confirmCode, password)
+    }
+
     // pass the data from web redirect to Amplify libs
-    fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.d("UserInteractor", "received requestCode : $requestCode and resultCode : $resultCode")
         if (requestCode == AWSCognitoAuthPlugin.WEB_UI_SIGN_IN_ACTIVITY_CODE) {
             Amplify.Auth.handleWebUISignInResponse(data)
         }
-    }
+    }*/
 }

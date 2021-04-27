@@ -1,5 +1,6 @@
 package hu.bme.aut.mystudentapp.ui.courses.addcourse
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import hu.bme.aut.mystudentapp.data.model.Course
 import hu.bme.aut.mystudentapp.data.model.Role
 import hu.bme.aut.mystudentapp.data.model.User
 import hu.bme.aut.mystudentapp.ui.MainActivity
+import hu.bme.aut.mystudentapp.ui.timepickerdialog.TimePickerRangeDialogFragment
 import hu.mystudentapp.R
 import kotlinx.android.synthetic.main.fragment_add_course.*
 import java.util.*
@@ -33,6 +35,9 @@ class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewM
 
     override fun provideViewModel() = getViewModelFromFactory()
 
+    var start = ""
+    var end = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,21 +52,18 @@ class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewM
 
         listener = context as NewCourseFragmentListener
 
-        var startHour = ""
-        var startMinute = ""
-        var endHour = ""
-        var endMinute = ""
-
         btnSelectCourse.setOnClickListener {
-            findNavController().navigate(R.id.action_addCourseFragment_to_searchCoursesFragment)
+            findNavController().navigate(R.id.searchCoursesFragment)
         }
 
         btnSelectTime.setOnClickListener {
-            //TODO: saját TimeRangePickerDialogFragment
+            val timePickerDialogFragment = TimePickerRangeDialogFragment()
+            timePickerDialogFragment.setTargetFragment(this, 0)
+            timePickerDialogFragment.show(requireFragmentManager(), "TimePickerDialogFragment")
         }
 
         btnCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_addCourseFragment_to_coursesFragment)
+            findNavController().navigate(R.id.coursesFragment)
         }
 
         btnOk.setOnClickListener {
@@ -77,14 +79,12 @@ class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewM
                 val userList = ArrayList<User>()
                 userList.add(User.from(currentUser))
                 val teachersList = ArrayList<String>()
-                if(currentUser.role == Role.TEACHER.toString()) teachersList.add(currentUser.name)
-                UserDataBackend.hasUserData.value?.let { it1 -> userList.add(it1) }
                 val course = Course(
                     UUID.randomUUID().toString(),
                     etNewCourseCode.text.toString(),
                     etNewCourseName.text.toString(),
                     numpickerCredit.value,
-                    time = pickerValues[dayPicker.value] + " " + startHour+":"+startMinute,
+                    time = pickerValues[dayPicker.value] + " " + start + " - " + end,
                     userList,
                     ArrayList(),
                     ArrayList(),
@@ -105,6 +105,15 @@ class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewM
                 }
 
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode : Int, resultCode : Int, data: Intent?){
+        if(requestCode == TimePickerRangeDialogFragment.REQUEST_CODE){
+            start = data!!.getStringExtra(TimePickerRangeDialogFragment.START_TIME_BUNDLE_EXTRA).toString()
+            end = data.getStringExtra(TimePickerRangeDialogFragment.END_TIME_BUNDLE_EXTRA).toString()
+            val text = "$start - $end"
+            tvCourseTime.text = text
         }
     }
 

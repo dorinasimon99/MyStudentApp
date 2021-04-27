@@ -17,11 +17,16 @@ class SearchCoursesViewModel @Inject constructor(
             coursesPresenter.loadAllCourses()
             ListSearchCourses
         } catch (e: Exception){
-            SearchCoursesError
+            SearchCoursesError(e)
         }
     }
 
     fun addCourseToLocalCourses(c: Course) = execute {
-        coursesPresenter.addCourseToLocal(c)
+        viewState = try {
+            coursesPresenter.addCourseToLocal(c)
+            ListCourseAdded
+        } catch (e: Exception){
+            SearchCoursesError(e)
+        }
     }
 }

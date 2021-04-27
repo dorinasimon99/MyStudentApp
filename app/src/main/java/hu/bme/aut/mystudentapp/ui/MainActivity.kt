@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.navigation.NavigationView
 import hu.bme.aut.mystudentapp.backend.NetworkBackend
@@ -17,18 +18,22 @@ import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.data.model.Course
 import hu.bme.aut.mystudentapp.data.model.Role
 import hu.bme.aut.mystudentapp.ui.courses.addcourse.AddCourseFragment
+import hu.bme.aut.mystudentapp.ui.courses.searchcourses.SearchCoursesFragment
+import hu.bme.aut.mystudentapp.ui.main.MainScreenFragment
 import hu.mystudentapp.R
-import kotlinx.coroutines.delay
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AddCourseFragment.NewCourseFragmentListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AddCourseFragment.NewCourseFragmentListener/*,
+SearchCoursesFragment.NewCourseFromListFragmentListener*/{
 
     private lateinit var drawer : DrawerLayout
     private lateinit var toggle : ActionBarDrawerToggle
+    lateinit var navController : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //NetworkBackend.signOut()
         val toolbar : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
 
@@ -47,31 +52,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onStart() {
         super.onStart()
-
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        navController.navigate(R.id.mainScreenFragment)
-
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navController.navigate(R.id.loadingFragment)
         UserDataBackend.isSignedIn.observe(this, Observer<Boolean> { isSignedUp ->
             Log.i(TAG, "isSignedIn changed : $isSignedUp")
-
-            Thread.sleep(2000)
             if (isSignedUp) {
-                val data = UserDataBackend.getUserData()
-                if (data == null) {
-                    navController.navigate(R.id.selectRoleFragment)
-                }
+                navController.navigate(R.id.mainScreenFragment)
                 UserDataBackend.hasUserData.observe(this, { userData ->
                     when(userData.role){
-                        Role.STUDENT.toString() ->{
+                        Role.STUDENT.toString() -> {
                             navController.navigate(R.id.studentMainFragment)
                         }
                         Role.TEACHER.toString() -> {
                             navController.navigate(R.id.teacherMainFragment)
                         }
-                        else -> throw Exception("Something wrong with role!")
+                        else -> navController.navigate(R.id.selectRoleFragment)
                     }
                 })
-            } else if(!isSignedUp){
+            } else if (!isSignedUp){
                 navController.navigate(R.id.signInFragment)
             }
         })
@@ -100,6 +98,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 NetworkBackend.signOut()
                 Toast.makeText(this, "Signed out!", Toast.LENGTH_SHORT).show()
             }
+            R.id.main_page -> {
+                when(UserDataBackend.currentUser.role){
+                    Role.STUDENT.toString() -> navController.navigate(R.id.studentMainFragment)
+                    Role.TEACHER.toString() -> navController.navigate(R.id.teacherMainFragment)
+                }
+            }
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
@@ -113,7 +117,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCourseCreated(newCourse: Course) {
+    override fun onCourseCreated(newCourse: Course) {}
+    //override fun onCourseAdded(newCourse: Course) {}
 
-    }
+
 }

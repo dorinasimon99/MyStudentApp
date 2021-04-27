@@ -27,7 +27,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @Index(name = "byUser", fields = {"ownerID"})
 @Index(name = "byCourse", fields = {"courseID"})
 public final class QuizData implements Model {
-  public static final QueryField ID = field( "id");
+  public static final QueryField ID = field("id");
   public static final QueryField OWNER = field("ownerID");
   public static final QueryField COURSE = field("courseID");
   public static final QueryField QUIZ_QUESTIONS = field("quizQuestions");

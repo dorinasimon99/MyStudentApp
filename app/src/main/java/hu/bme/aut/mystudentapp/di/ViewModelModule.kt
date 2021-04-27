@@ -9,10 +9,12 @@ import hu.bme.aut.mystudentapp.ui.courses.addcourse.AddCourseViewModel
 import hu.bme.aut.mystudentapp.ui.courses.CoursesViewModel
 import hu.bme.aut.mystudentapp.ui.courses.coursedetailsstudent.CourseDetailsViewModel
 import hu.bme.aut.mystudentapp.ui.courses.searchcourses.SearchCoursesViewModel
+import hu.bme.aut.mystudentapp.ui.main.MainScreenViewModel
 import hu.bme.aut.mystudentapp.ui.schedule.ScheduleViewModel
 import hu.bme.aut.mystudentapp.ui.selectrole.SelectRoleScreenViewModel
 import hu.bme.aut.mystudentapp.ui.signin.SignInScreenViewModel
 import hu.bme.aut.mystudentapp.ui.student.StudentScreenViewModel
+import hu.bme.aut.mystudentapp.ui.teacher.TeacherViewModel
 import hu.bme.aut.mystudentapp.ui.teacher.teacherrating.TeacherRatesViewModel
 
 @Module
@@ -63,4 +65,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ScheduleViewModel::class)
     abstract fun bindScheduleViewModel(scheduleViewModel: ScheduleViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainScreenViewModel::class)
+    abstract fun bindMainScreenViewModel(mainScreenViewModel: MainScreenViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TeacherViewModel::class)
+    abstract fun bindTeacherViewModel(teacherViewModel: TeacherViewModel) : ViewModel
 }

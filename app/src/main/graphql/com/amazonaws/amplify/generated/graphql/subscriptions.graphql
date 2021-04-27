@@ -3,6 +3,7 @@ subscription OnCreateUserData {
   onCreateUserData {
     id
     name
+    username
     role
     grade
     courses {
@@ -47,6 +48,7 @@ subscription OnUpdateUserData {
   onUpdateUserData {
     id
     name
+    username
     role
     grade
     courses {
@@ -91,6 +93,7 @@ subscription OnDeleteUserData {
   onDeleteUserData {
     id
     name
+    username
     role
     grade
     courses {
@@ -272,6 +275,7 @@ subscription OnCreateUserCourse {
     user {
       id
       name
+      username
       role
       grade
       courses {
@@ -317,6 +321,7 @@ subscription OnUpdateUserCourse {
     user {
       id
       name
+      username
       role
       grade
       courses {
@@ -362,6 +367,7 @@ subscription OnDeleteUserCourse {
     user {
       id
       name
+      username
       role
       grade
       courses {
@@ -408,6 +414,7 @@ subscription OnCreateCardData {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -456,6 +463,7 @@ subscription OnUpdateCardData {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -504,6 +512,7 @@ subscription OnDeleteCardData {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -552,6 +561,7 @@ subscription OnCreateQuizData {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -600,6 +610,7 @@ subscription OnUpdateQuizData {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -648,6 +659,7 @@ subscription OnDeleteQuizData {
     owner {
       id
       name
+      username
       role
       grade
       courses {

@@ -19,7 +19,7 @@ import kotlin.coroutines.coroutineContext
 class TodoRecyclerViewAdapter(
     private val values: MutableList<Todo>?,
     private val todoClickListener: TodoClickListener,
-    private val context: Context
+    context: Context
 ) :
     RecyclerView.Adapter<TodoRecyclerViewAdapter.ViewHolder>() {
 

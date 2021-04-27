@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#dcedc8</color>      <!--purple: #d1c4e9 green:#c8e6c9 -->
     <color name="colorPrimaryDark">#aabb97</color>  <!--purple: #a094b7 green:  #97b498-->
-    <color name="colorAccent">#FFFFFF</color>       <!--purple: #fff7ff -->
+    <color name="colorAccent">#dcedc8</color>       <!--purple: #fff7ff -->
     <color name="textColorPrimary">#442C2E</color>
     <color name="textInputOutlineColor">#9c64a6</color> <!--green: #97b498  brown:#cb9b8c -->
     <color name="colorSecondaryDark">#9c64a6</color>    <!--green: #97b498 brown:#cb9b8c -->

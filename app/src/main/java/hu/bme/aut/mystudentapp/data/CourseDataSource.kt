@@ -1,5 +1,6 @@
 package hu.bme.aut.mystudentapp.data
 
+import hu.bme.aut.mystudentapp.backend.NetworkBackend
 import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.data.dataAnnotationObject.CourseDao
 import hu.bme.aut.mystudentapp.data.model.Course
@@ -13,9 +14,13 @@ class CourseDataSource @Inject constructor(
 ){
 
     suspend fun loadCourses() : List<Course>?{
-        val courses = courseDao.getCoursesFromLocalDb()
+        //courseDao.deleteAll()
+        val courses = courseDao.getCoursesFromLocalDb(UserDataBackend.currentUser.id)
         if(courses.isEmpty()){
             UserDataBackend.getCourses()
+            for(local in UserDataBackend.localCourses().value!!){
+                courseDao.insert(LocalCourseEntity(local.id, local.courseCode, local.name, local.credits, local.time, UserDataBackend.currentUser.id))
+            }
         }
         else {
             localCourseToCourse(courses)
@@ -34,9 +39,9 @@ class CourseDataSource @Inject constructor(
     }
 
     suspend fun addCourseToLocal(course: Course){
-        //UserDataBackend.addCourseToLocal(course)
-        val localCourse = LocalCourseEntity(course.id, course.courseCode, course.name, course.credits, course.time)
-        courseDao.insert(localCourse)
+        UserDataBackend.addUserCourseData(course)
+        courseDao.insert(LocalCourseEntity(course.id, course.courseCode, course.name, course.credits, course.time, UserDataBackend.currentUser.id))
+
     }
 
     suspend fun loadCourseDetails(){
@@ -51,9 +56,16 @@ class CourseDataSource @Inject constructor(
         for(local in localCourses){
             val course = Course(local.id, local.courseCode, local.name, local.credits, local.time)
             val currentLocals = UserDataBackend.localCourses().value
-            if(!currentLocals!!.contains(course)) {
+            if(currentLocals == null){
+                UserDataBackend.addCourseToLocal(course)
+            }
+            else if(!currentLocals.contains(course)) {
                 UserDataBackend.addCourseToLocal(course)
             }
         }
+    }
+
+    suspend fun loadTeachers(course: String) {
+        UserDataBackend.getTeachers(course)
     }
 }

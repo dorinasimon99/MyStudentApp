@@ -4,4 +4,6 @@ sealed class CourseDetailsViewState
 
 object CourseDetailsInitial : CourseDetailsViewState()
 
+object CourseDetailsTeachers : CourseDetailsViewState()
+
 object CourseDetailsError : CourseDetailsViewState()

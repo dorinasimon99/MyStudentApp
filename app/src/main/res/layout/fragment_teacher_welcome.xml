@@ -24,7 +24,7 @@
             android:drawableTop="@drawable/ic_baseline_class_96"
             android:text="@string/classes"
             android:paddingVertical="60dp"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
         <Button
             android:id="@+id/btnSchedule"
@@ -35,7 +35,7 @@
             android:drawableTop="@drawable/ic_baseline_schedule_96"
             android:text="@string/schedule"
             android:paddingVertical="60dp"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
     </LinearLayout>
 
@@ -54,7 +54,7 @@
             android:drawableTop="@drawable/ic_baseline_quiz_96"
             android:text="@string/quiz"
             android:paddingVertical="60dp"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
         <Button
             android:id="@+id/btnToday"
@@ -65,7 +65,7 @@
             android:drawableTop="@drawable/ic_baseline_today_96"
             android:text="@string/today"
             android:paddingVertical="60dp"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
 
     </LinearLayout>
 

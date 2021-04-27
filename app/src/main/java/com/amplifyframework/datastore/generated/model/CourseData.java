@@ -29,7 +29,8 @@ public final class CourseData implements Model {
   public static final QueryField COURSE_CODE = field("courseCode");
   public static final QueryField NAME = field("name");
   public static final QueryField CREDITS = field("credits");
-  public static final QueryField TIME = field( "time");
+  public static final QueryField TIME = field("time");
+  public static final QueryField TEACHERS = field("teachers");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String courseCode;
   private final @ModelField(targetType="String", isRequired = true) String name;
@@ -38,6 +39,7 @@ public final class CourseData implements Model {
   private final @ModelField(targetType="CardData") @HasMany(associatedWith = "course", type = CardData.class) List<CardData> cards = null;
   private final @ModelField(targetType="QuizData") @HasMany(associatedWith = "course", type = QuizData.class) List<QuizData> quizzes = null;
   private final @ModelField(targetType="String", isRequired = true) String time;
+  private final @ModelField(targetType="String") List<String> teachers;
   public String getId() {
       return id;
   }
@@ -70,12 +72,17 @@ public final class CourseData implements Model {
       return time;
   }
   
-  private CourseData(String id, String courseCode, String name, Integer credits, String time) {
+  public List<String> getTeachers() {
+      return teachers;
+  }
+  
+  private CourseData(String id, String courseCode, String name, Integer credits, String time, List<String> teachers) {
     this.id = id;
     this.courseCode = courseCode;
     this.name = name;
     this.credits = credits;
     this.time = time;
+    this.teachers = teachers;
   }
   
   @Override
@@ -90,7 +97,8 @@ public final class CourseData implements Model {
               ObjectsCompat.equals(getCourseCode(), courseData.getCourseCode()) &&
               ObjectsCompat.equals(getName(), courseData.getName()) &&
               ObjectsCompat.equals(getCredits(), courseData.getCredits()) &&
-              ObjectsCompat.equals(getTime(), courseData.getTime());
+              ObjectsCompat.equals(getTime(), courseData.getTime()) &&
+              ObjectsCompat.equals(getTeachers(), courseData.getTeachers());
       }
   }
   
@@ -102,6 +110,7 @@ public final class CourseData implements Model {
       .append(getName())
       .append(getCredits())
       .append(getTime())
+      .append(getTeachers())
       .toString()
       .hashCode();
   }
@@ -114,7 +123,8 @@ public final class CourseData implements Model {
       .append("courseCode=" + String.valueOf(getCourseCode()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("credits=" + String.valueOf(getCredits()) + ", ")
-      .append("time=" + String.valueOf(getTime()))
+      .append("time=" + String.valueOf(getTime()) + ", ")
+      .append("teachers=" + String.valueOf(getTeachers()))
       .append("}")
       .toString();
   }
@@ -147,6 +157,7 @@ public final class CourseData implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -156,7 +167,8 @@ public final class CourseData implements Model {
       courseCode,
       name,
       credits,
-      time);
+      time,
+      teachers);
   }
   public interface CourseCodeStep {
     NameStep courseCode(String courseCode);
@@ -181,6 +193,7 @@ public final class CourseData implements Model {
   public interface BuildStep {
     CourseData build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep teachers(List<String> teachers);
   }
   
 
@@ -190,6 +203,7 @@ public final class CourseData implements Model {
     private String name;
     private Integer credits;
     private String time;
+    private List<String> teachers;
     @Override
      public CourseData build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -199,7 +213,8 @@ public final class CourseData implements Model {
           courseCode,
           name,
           credits,
-          time);
+          time,
+          teachers);
     }
     
     @Override
@@ -230,6 +245,12 @@ public final class CourseData implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep teachers(List<String> teachers) {
+        this.teachers = teachers;
+        return this;
+    }
+    
     /** 
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
@@ -253,12 +274,13 @@ public final class CourseData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String courseCode, String name, Integer credits, String time) {
+    private CopyOfBuilder(String id, String courseCode, String name, Integer credits, String time, List<String> teachers) {
       super.id(id);
       super.courseCode(courseCode)
         .name(name)
         .credits(credits)
-        .time(time);
+        .time(time)
+        .teachers(teachers);
     }
     
     @Override
@@ -279,6 +301,11 @@ public final class CourseData implements Model {
     @Override
      public CopyOfBuilder time(String time) {
       return (CopyOfBuilder) super.time(time);
+    }
+    
+    @Override
+     public CopyOfBuilder teachers(List<String> teachers) {
+      return (CopyOfBuilder) super.teachers(teachers);
     }
   }
   

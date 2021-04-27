@@ -3,6 +3,7 @@ query GetUserData($id: ID!) {
   getUserData(id: $id) {
     id
     name
+    username
     role
     grade
     courses {
@@ -52,6 +53,7 @@ query ListUserDatas(
     items {
       id
       name
+      username
       role
       grade
       courses {
@@ -149,6 +151,7 @@ query GetUserCourse($id: ID!) {
     user {
       id
       name
+      username
       role
       grade
       courses {
@@ -199,6 +202,7 @@ query ListUserCourses(
       user {
         id
         name
+        username
         role
         grade
         createdAt
@@ -229,6 +233,7 @@ query GetCardData($id: ID!) {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -282,6 +287,7 @@ query ListCardDatas(
       owner {
         id
         name
+        username
         role
         grade
         createdAt
@@ -314,6 +320,7 @@ query GetQuizData($id: ID!) {
     owner {
       id
       name
+      username
       role
       grade
       courses {
@@ -367,6 +374,7 @@ query ListQuizDatas(
       owner {
         id
         name
+        username
         role
         grade
         createdAt

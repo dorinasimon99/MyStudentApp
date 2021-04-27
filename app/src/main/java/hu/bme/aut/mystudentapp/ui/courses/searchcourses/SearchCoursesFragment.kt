@@ -1,7 +1,10 @@
 package hu.bme.aut.mystudentapp.ui.courses.searchcourses
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -11,15 +14,18 @@ import co.zsmb.rainbowcake.dagger.getViewModelFromFactory
 import co.zsmb.rainbowcake.extensions.exhaustive
 import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.data.model.Course
+import hu.bme.aut.mystudentapp.data.model.Role
+import hu.bme.aut.mystudentapp.data.model.User
 import hu.bme.aut.mystudentapp.ui.MainActivity
 import hu.bme.aut.mystudentapp.ui.courses.CourseRecyclerViewAdapter
+import hu.bme.aut.mystudentapp.ui.courses.addcourse.AddCourseFragment
 import hu.mystudentapp.R
 import kotlinx.android.synthetic.main.content_courses.*
 import kotlinx.android.synthetic.main.fragment_search_courses.*
 
 class SearchCoursesFragment : RainbowCakeFragment<SearchCoursesViewState, SearchCoursesViewModel>(), CourseRecyclerViewAdapter.CourseItemClickListener {
 
-    private lateinit var adapter : CourseRecyclerViewAdapter
+    private var adapter : CourseRecyclerViewAdapter? = null
 
     override fun getViewResource() = R.layout.fragment_search_courses
 
@@ -34,7 +40,7 @@ class SearchCoursesFragment : RainbowCakeFragment<SearchCoursesViewState, Search
 
         searchViewCourse.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextChange(newText: String?): Boolean {
-                adapter.filter.filter(newText)
+                adapter?.filter?.filter(newText)
                 return false
             }
 
@@ -47,9 +53,8 @@ class SearchCoursesFragment : RainbowCakeFragment<SearchCoursesViewState, Search
 
     private fun setupRecyclerView(recyclerView: RecyclerView){
         UserDataBackend.courses().observe(requireActivity(), { courses ->
-            adapter = CourseRecyclerViewAdapter(courses, this)
+            adapter  = CourseRecyclerViewAdapter(courses, this)
             recyclerView.adapter = adapter
-            adapter.update(courses)
         })
     }
 
@@ -59,8 +64,11 @@ class SearchCoursesFragment : RainbowCakeFragment<SearchCoursesViewState, Search
                 (activity as MainActivity).supportActionBar?.title = "All courses"
             }
             ListSearchCourses -> {}
-            SearchCoursesError -> {
-                Toast.makeText(context, "Error in loading all courses", Toast.LENGTH_SHORT).show()
+            ListCourseAdded -> {
+                findNavController().navigate(R.id.coursesFragment)
+            }
+            is SearchCoursesError -> {
+                Log.e("SearchCoursesFragment", viewState.e.toString())
             }
         }.exhaustive
     }
@@ -68,6 +76,5 @@ class SearchCoursesFragment : RainbowCakeFragment<SearchCoursesViewState, Search
     override fun onCourseClicked(item: Course) {
         //TODO: dialogfragment, hogy biztos-e
         viewModel.addCourseToLocalCourses(item)
-        findNavController().navigate(R.id.action_searchCoursesFragment_to_coursesFragment)
     }
 }

@@ -17,7 +17,7 @@ class CoursesPresenter @Inject constructor(
         coursesInteractor.addCourse(course)
     }
 
-    suspend fun addCourseToLocal(course: Course){
+    suspend fun addCourseToLocal(course: Course) {
         coursesInteractor.addCourseToLocal(course)
     }
 
@@ -35,5 +35,9 @@ class CoursesPresenter @Inject constructor(
 
     suspend fun deleteTodo(todo: Int){
         coursesInteractor.deleteTodo(todo)
+    }
+
+    suspend fun loadTeachers(course: String) {
+        coursesInteractor.loadTeachers(course)
     }
 }

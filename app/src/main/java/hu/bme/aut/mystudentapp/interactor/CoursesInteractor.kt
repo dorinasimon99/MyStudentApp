@@ -35,4 +35,8 @@ class CoursesInteractor @Inject constructor(
     suspend fun deleteTodo(todo: Int){
         courseDataSource.deleteTodo(todo)
     }
+
+    suspend fun loadTeachers(course: String) {
+        courseDataSource.loadTeachers(course)
+    }
 }
