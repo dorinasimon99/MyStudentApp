@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imgTeacherProfile"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/appbarmargin"
         android:src="@mipmap/teacher_profile_temp"
@@ -21,35 +23,90 @@
         android:gravity="center"
         android:textSize="20sp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
         android:layout_marginStart="10dp"
-        android:gravity="center"
-        android:text="Rates"
-        android:textSize="16sp" />
+        android:layout_marginEnd="30dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/rates"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/btnAddRate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_36"
+            style="@style/Widget.StudentApp.ImageButton.Borderless.Colored"/>
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/teacher_rates_list"
-            android:name="hu.bme.aut.mystudentapp.TeacherRatesListFragment"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/teacher_rates_list"
+                android:name="hu.bme.aut.mystudentapp.TeacherRatesListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/single_teacher_rate"/>
+
+        </FrameLayout>
 
     </androidx.core.widget.NestedScrollView>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:text="@string/comments"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/btnAddComment"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_36"
+            style="@style/Widget.StudentApp.ImageButton.Borderless.Colored"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
         <include layout="@layout/content_comments"/>
 
     </ScrollView>
+
 
 
 </LinearLayout>

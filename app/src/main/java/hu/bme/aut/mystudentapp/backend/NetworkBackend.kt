@@ -51,6 +51,8 @@ import kotlinx.coroutines.flow.flowOf
 import okhttp3.FormBody
 import org.json.JSONObject
 import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 object NetworkBackend {
 
@@ -133,39 +135,51 @@ object NetworkBackend {
         Log.i(TAG, "Initiate Signout Sequence")
 
         Amplify.Auth.signOut(
-            {
-                Log.i(TAG, "Signed out!")
-            },
+            { Log.i(TAG, "Signed out!") },
             { error -> Log.e(TAG, error.toString()) }
         )
-
     }
 
-    fun signIn(username: String, password: String) {
+    suspend fun signIn(username: String, password: String) : String {
         Log.i(TAG, "Initiate Signin Sequence")
 
-        Amplify.Auth.signIn(
-            username,
-            password,
-            {result: AuthSignInResult ->
-                Log.i(TAG, result.toString())},
-            {error: AuthException -> Log.e(TAG, error.toString())}
-        )
+        return suspendCoroutine { continuation ->
+            Amplify.Auth.signIn(
+                username,
+                password,
+                {result: AuthSignInResult ->
+                    Log.i(TAG, result.toString())
+                    continuation.resume("")
+                },
+                {error: AuthException ->
+                    Log.e(TAG, error.toString())
+                    continuation.resume(error.message.toString())
+                }
+            )
+        }
     }
 
-    fun signUp(username: String, password: String, email: String){
+    suspend fun signUp(username: String, password: String, email: String) : String? {
         Log.i(TAG, "Initiate SignUp Sequence")
 
-        Amplify.Auth.signUp(
-            username,
-            password,
-            AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build(),
-            {result: AuthSignUpResult -> Log.i(TAG, result.toString())},
-            {error: AuthException -> Log.i(TAG, error.toString())}
-        )
+        return suspendCoroutine { continuation ->
+            Amplify.Auth.signUp(
+                username,
+                password,
+                AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(), email).build(),
+                {result: AuthSignUpResult ->
+                    Log.i(TAG, result.toString())
+                    continuation.resume(null)
+                },
+                {error: AuthException ->
+                    Log.i(TAG, error.toString())
+                    continuation.resume(error.message.toString())
+                }
+            )
+        }
     }
 
-    fun confirmSignUp(username: String, confirmCode: String, password: String){
+    suspend fun confirmSignUp(username: String, confirmCode: String, password: String) : String{
         Log.i(TAG, "Initiate Confirm SignUp Sequence")
 
         Amplify.Auth.confirmSignUp(
@@ -175,14 +189,6 @@ object NetworkBackend {
             {error: AuthException -> Log.i(TAG, error.toString())}
         )
 
-        signIn(username, password)
-    }
-
-    // pass the data from web redirect to Amplify libs
-    fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d(TAG, "received requestCode : $requestCode and resultCode : $resultCode")
-        if (requestCode == AWSCognitoAuthPlugin.WEB_UI_SIGN_IN_ACTIVITY_CODE) {
-            Amplify.Auth.handleWebUISignInResponse(data)
-        }
+        return signIn(username, password)
     }
 }

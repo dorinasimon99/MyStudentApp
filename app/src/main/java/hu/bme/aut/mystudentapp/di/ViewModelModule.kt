@@ -7,13 +7,14 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import hu.bme.aut.mystudentapp.ui.courses.addcourse.AddCourseViewModel
 import hu.bme.aut.mystudentapp.ui.courses.CoursesViewModel
-import hu.bme.aut.mystudentapp.ui.courses.coursedetailsstudent.CourseDetailsViewModel
+import hu.bme.aut.mystudentapp.ui.courses.coursedetailsstudent.CourseDetailsStudentViewModel
+import hu.bme.aut.mystudentapp.ui.courses.coursedetailsteacher.CourseDetailsTeacherViewModel
 import hu.bme.aut.mystudentapp.ui.courses.searchcourses.SearchCoursesViewModel
-import hu.bme.aut.mystudentapp.ui.main.MainScreenViewModel
+import hu.bme.aut.mystudentapp.ui.main.MainViewModel
 import hu.bme.aut.mystudentapp.ui.schedule.ScheduleViewModel
-import hu.bme.aut.mystudentapp.ui.selectrole.SelectRoleScreenViewModel
-import hu.bme.aut.mystudentapp.ui.signin.SignInScreenViewModel
-import hu.bme.aut.mystudentapp.ui.student.StudentScreenViewModel
+import hu.bme.aut.mystudentapp.ui.selectrole.SelectRoleViewModel
+import hu.bme.aut.mystudentapp.ui.signin.SignInViewModel
+import hu.bme.aut.mystudentapp.ui.student.StudentViewModel
 import hu.bme.aut.mystudentapp.ui.teacher.TeacherViewModel
 import hu.bme.aut.mystudentapp.ui.teacher.teacherrating.TeacherRatesViewModel
 
@@ -22,18 +23,18 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SignInScreenViewModel::class)
-    abstract fun bindSignInViewModel(signInViewModel: SignInScreenViewModel) : ViewModel
+    @ViewModelKey(SignInViewModel::class)
+    abstract fun bindSignInViewModel(signInViewModel: SignInViewModel) : ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(SelectRoleScreenViewModel::class)
-    abstract fun bindSelectRoleViewModel(selectRoleViewModel: SelectRoleScreenViewModel) : ViewModel
+    @ViewModelKey(SelectRoleViewModel::class)
+    abstract fun bindSelectRoleViewModel(selectRoleViewModel: SelectRoleViewModel) : ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(StudentScreenViewModel::class)
-    abstract fun bindStudentViewModel(studentViewModel: StudentScreenViewModel) : ViewModel
+    @ViewModelKey(StudentViewModel::class)
+    abstract fun bindStudentViewModel(studentViewModel: StudentViewModel) : ViewModel
 
     @Binds
     @IntoMap
@@ -48,8 +49,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CourseDetailsViewModel::class)
-    abstract fun bindCourseDetailsViewModel(courseDetailsViewModel: CourseDetailsViewModel) : ViewModel
+    @ViewModelKey(CourseDetailsStudentViewModel::class)
+    abstract fun bindCourseDetailsViewModel(courseDetailsStudentViewModel: CourseDetailsStudentViewModel) : ViewModel
 
     @Binds
     @IntoMap
@@ -68,11 +69,16 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainScreenViewModel::class)
-    abstract fun bindMainScreenViewModel(mainScreenViewModel: MainScreenViewModel) : ViewModel
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainScreenViewModel(mainViewModel: MainViewModel) : ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(TeacherViewModel::class)
     abstract fun bindTeacherViewModel(teacherViewModel: TeacherViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CourseDetailsTeacherViewModel::class)
+    abstract fun bindCourseDetailsTeacherTeacherViewModel(courseDetailsTeacherViewModel: CourseDetailsTeacherViewModel) : ViewModel
 }

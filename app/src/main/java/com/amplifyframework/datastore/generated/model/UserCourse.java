@@ -22,15 +22,25 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the UserCourse type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "UserCourses", authRules = {
-  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE })
+  @AuthRule(allow = AuthStrategy.OWNER, ownerField = "owner", identityClaim = "cognito:username", operations = { ModelOperation.CREATE, ModelOperation.DELETE })
 })
 public final class UserCourse implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField USER = field("userCourseUserId");
   public static final QueryField COURSE = field("userCourseCourseId");
+  public static final QueryField RATING = field("rating");
+  public static final QueryField RATING_NUM = field("ratingNum");
+  public static final QueryField SEMESTER = field("semester");
+  public static final QueryField GRADE = field("grade");
+  public static final QueryField LESSONS = field("lessons");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="UserData", isRequired = true) @BelongsTo(targetName = "userCourseUserId", type = UserData.class) UserData user;
   private final @ModelField(targetType="CourseData", isRequired = true) @BelongsTo(targetName = "userCourseCourseId", type = CourseData.class) CourseData course;
+  private final @ModelField(targetType="String") String rating;
+  private final @ModelField(targetType="Int") Integer ratingNum;
+  private final @ModelField(targetType="Int") Integer semester;
+  private final @ModelField(targetType="Int") Integer grade;
+  private final @ModelField(targetType="String") List<String> lessons;
   public String getId() {
       return id;
   }
@@ -43,10 +53,35 @@ public final class UserCourse implements Model {
       return course;
   }
   
-  private UserCourse(String id, UserData user, CourseData course) {
+  public String getRating() {
+      return rating;
+  }
+  
+  public Integer getRatingNum() {
+      return ratingNum;
+  }
+  
+  public Integer getSemester() {
+      return semester;
+  }
+  
+  public Integer getGrade() {
+      return grade;
+  }
+  
+  public List<String> getLessons() {
+      return lessons;
+  }
+  
+  private UserCourse(String id, UserData user, CourseData course, String rating, Integer ratingNum, Integer semester, Integer grade, List<String> lessons) {
     this.id = id;
     this.user = user;
     this.course = course;
+    this.rating = rating;
+    this.ratingNum = ratingNum;
+    this.semester = semester;
+    this.grade = grade;
+    this.lessons = lessons;
   }
   
   @Override
@@ -59,7 +94,12 @@ public final class UserCourse implements Model {
       UserCourse userCourse = (UserCourse) obj;
       return ObjectsCompat.equals(getId(), userCourse.getId()) &&
               ObjectsCompat.equals(getUser(), userCourse.getUser()) &&
-              ObjectsCompat.equals(getCourse(), userCourse.getCourse());
+              ObjectsCompat.equals(getCourse(), userCourse.getCourse()) &&
+              ObjectsCompat.equals(getRating(), userCourse.getRating()) &&
+              ObjectsCompat.equals(getRatingNum(), userCourse.getRatingNum()) &&
+              ObjectsCompat.equals(getSemester(), userCourse.getSemester()) &&
+              ObjectsCompat.equals(getGrade(), userCourse.getGrade()) &&
+              ObjectsCompat.equals(getLessons(), userCourse.getLessons());
       }
   }
   
@@ -69,6 +109,11 @@ public final class UserCourse implements Model {
       .append(getId())
       .append(getUser())
       .append(getCourse())
+      .append(getRating())
+      .append(getRatingNum())
+      .append(getSemester())
+      .append(getGrade())
+      .append(getLessons())
       .toString()
       .hashCode();
   }
@@ -79,7 +124,12 @@ public final class UserCourse implements Model {
       .append("UserCourse {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("user=" + String.valueOf(getUser()) + ", ")
-      .append("course=" + String.valueOf(getCourse()))
+      .append("course=" + String.valueOf(getCourse()) + ", ")
+      .append("rating=" + String.valueOf(getRating()) + ", ")
+      .append("ratingNum=" + String.valueOf(getRatingNum()) + ", ")
+      .append("semester=" + String.valueOf(getSemester()) + ", ")
+      .append("grade=" + String.valueOf(getGrade()) + ", ")
+      .append("lessons=" + String.valueOf(getLessons()))
       .append("}")
       .toString();
   }
@@ -110,6 +160,11 @@ public final class UserCourse implements Model {
     return new UserCourse(
       id,
       null,
+      null,
+      null,
+      null,
+      null,
+      null,
       null
     );
   }
@@ -117,7 +172,12 @@ public final class UserCourse implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       user,
-      course);
+      course,
+      rating,
+      ratingNum,
+      semester,
+      grade,
+      lessons);
   }
   public interface UserStep {
     CourseStep user(UserData user);
@@ -132,6 +192,11 @@ public final class UserCourse implements Model {
   public interface BuildStep {
     UserCourse build();
     BuildStep id(String id) throws IllegalArgumentException;
+    BuildStep rating(String rating);
+    BuildStep ratingNum(Integer ratingNum);
+    BuildStep semester(Integer semester);
+    BuildStep grade(Integer grade);
+    BuildStep lessons(List<String> lessons);
   }
   
 
@@ -139,6 +204,11 @@ public final class UserCourse implements Model {
     private String id;
     private UserData user;
     private CourseData course;
+    private String rating;
+    private Integer ratingNum;
+    private Integer semester;
+    private Integer grade;
+    private List<String> lessons;
     @Override
      public UserCourse build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -146,7 +216,12 @@ public final class UserCourse implements Model {
         return new UserCourse(
           id,
           user,
-          course);
+          course,
+          rating,
+          ratingNum,
+          semester,
+          grade,
+          lessons);
     }
     
     @Override
@@ -160,6 +235,36 @@ public final class UserCourse implements Model {
      public BuildStep course(CourseData course) {
         Objects.requireNonNull(course);
         this.course = course;
+        return this;
+    }
+    
+    @Override
+     public BuildStep rating(String rating) {
+        this.rating = rating;
+        return this;
+    }
+    
+    @Override
+     public BuildStep ratingNum(Integer ratingNum) {
+        this.ratingNum = ratingNum;
+        return this;
+    }
+    
+    @Override
+     public BuildStep semester(Integer semester) {
+        this.semester = semester;
+        return this;
+    }
+    
+    @Override
+     public BuildStep grade(Integer grade) {
+        this.grade = grade;
+        return this;
+    }
+    
+    @Override
+     public BuildStep lessons(List<String> lessons) {
+        this.lessons = lessons;
         return this;
     }
     
@@ -186,10 +291,15 @@ public final class UserCourse implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, UserData user, CourseData course) {
+    private CopyOfBuilder(String id, UserData user, CourseData course, String rating, Integer ratingNum, Integer semester, Integer grade, List<String> lessons) {
       super.id(id);
       super.user(user)
-        .course(course);
+        .course(course)
+        .rating(rating)
+        .ratingNum(ratingNum)
+        .semester(semester)
+        .grade(grade)
+        .lessons(lessons);
     }
     
     @Override
@@ -200,6 +310,31 @@ public final class UserCourse implements Model {
     @Override
      public CopyOfBuilder course(CourseData course) {
       return (CopyOfBuilder) super.course(course);
+    }
+    
+    @Override
+     public CopyOfBuilder rating(String rating) {
+      return (CopyOfBuilder) super.rating(rating);
+    }
+    
+    @Override
+     public CopyOfBuilder ratingNum(Integer ratingNum) {
+      return (CopyOfBuilder) super.ratingNum(ratingNum);
+    }
+    
+    @Override
+     public CopyOfBuilder semester(Integer semester) {
+      return (CopyOfBuilder) super.semester(semester);
+    }
+    
+    @Override
+     public CopyOfBuilder grade(Integer grade) {
+      return (CopyOfBuilder) super.grade(grade);
+    }
+    
+    @Override
+     public CopyOfBuilder lessons(List<String> lessons) {
+      return (CopyOfBuilder) super.lessons(lessons);
     }
   }
   

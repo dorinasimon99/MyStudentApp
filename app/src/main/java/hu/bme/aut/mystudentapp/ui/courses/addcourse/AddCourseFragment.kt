@@ -2,7 +2,6 @@ package hu.bme.aut.mystudentapp.ui.courses.addcourse
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -12,7 +11,6 @@ import co.zsmb.rainbowcake.extensions.exhaustive
 import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.backend.UserDataBackend.currentUser
 import hu.bme.aut.mystudentapp.data.model.Course
-import hu.bme.aut.mystudentapp.data.model.Role
 import hu.bme.aut.mystudentapp.data.model.User
 import hu.bme.aut.mystudentapp.ui.MainActivity
 import hu.bme.aut.mystudentapp.ui.timepickerdialog.TimePickerRangeDialogFragment
@@ -21,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_add_course.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewModel>() {
+class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewModel>(){
 
     interface NewCourseFragmentListener {
         fun onCourseCreated(newCourse: Course)
@@ -92,7 +90,7 @@ class AddCourseFragment : RainbowCakeFragment<AddCourseViewState, AddCourseViewM
                     ArrayList()
                 )
 
-                if(UserDataBackend.courses().value?.contains(course) == true){
+                if(UserDataBackend.courses().contains(course)){
                     Toast.makeText(
                         context,
                         "This course is already in the courses list, add this course from there",

@@ -9,31 +9,37 @@ import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.data.model.LocalUserData
 import hu.bme.aut.mystudentapp.data.model.User
+import hu.bme.aut.mystudentapp.interactor.UserInteractor
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import java.lang.Exception
 import javax.inject.Inject
 
-class MainScreenViewModel @Inject constructor(
-    private val mainScreenPresenter: MainScreenPresenter
+class MainViewModel @Inject constructor(
+    private val userInteractor: UserInteractor
 ) : RainbowCakeViewModel<MainScreenViewState>(MainScreenInitial) {
 
     fun getLocalUser(lifecycleOwner: LifecycleOwner) = execute {
         viewState = MainScreenInitial
-        var localUser: LocalUserData? = null
         try {
-            localUser = mainScreenPresenter.getLocalUser()
+            userInteractor.isSignedIn().observe(lifecycleOwner, {isSignedIn ->
+                if(isSignedIn){
+                    signedIn()
+                } else viewState = MainScreenSignedOut
+            })
+
         } catch (e: Exception) {
             viewState = MainScreenError(e)
         }
-        viewState = MainScreenLocalUser(localUser)
-        try {
-            mainScreenPresenter.getUserData(localUser?.username)
+        /*try {
         } catch (e: Exception){
             viewState = MainScreenError(e)
-        }
-
-
+        }*/
     }
 
+    fun signedIn() = execute {
+        val localUser = userInteractor.getLocalUser()
+        viewState = MainScreenLocalUser(localUser)
+        viewState = MainScreenUserData(userInteractor.getUserData(localUser?.username))
+    }
 }

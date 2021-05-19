@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 android:inputType="text"
-                style="@style/Widget.StudentApp.EditText"/>
+                android:backgroundTint="#ffffff"
+                android:textCursorDrawable="@drawable/color_cursor"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,11 +46,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
-                style="@style/Widget.StudentApp.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:backgroundTint="#ffffff"
+                android:textCursorDrawable="@drawable/color_cursor"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="@string/or" />
+            android:text="@string/or"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
@@ -84,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email_address"
                 android:inputType="text"
-                style="@style/Widget.StudentApp.EditText"/>
+                android:backgroundTint="#ffffff"
+                android:textCursorDrawable="@drawable/color_cursor"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,16 +99,16 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:text="@string/sign_up"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
-            android:id="@+id/btnSignUp2"
+            android:id="@+id/btnSendConfirm"
             style="@style/Widget.StudentApp.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="@string/sign_up"
+            android:text="@string/send_confirmation_code"
             android:textSize="16sp"
             android:visibility="gone"/>
 
@@ -121,9 +124,10 @@
                 android:id="@+id/etConfirmationCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirmation code you received"
+                android:hint="@string/confirmation_code_you_received"
                 android:inputType="number"
-                style="@style/Widget.StudentApp.EditText"/>
+                android:backgroundTint="#ffffff"
+                android:textCursorDrawable="@drawable/color_cursor"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,8 +141,5 @@
             android:visibility="gone"/>
 
     </LinearLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

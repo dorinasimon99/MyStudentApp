@@ -29,12 +29,10 @@ public final class UserData implements Model {
   public static final QueryField NAME = field("name");
   public static final QueryField USERNAME = field("username");
   public static final QueryField ROLE = field("role");
-  public static final QueryField GRADE = field("grade");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String username;
   private final @ModelField(targetType="String", isRequired = true) String role;
-  private final @ModelField(targetType="Int") Integer grade;
   private final @ModelField(targetType="UserCourse") @HasMany(associatedWith = "user", type = UserCourse.class) List<UserCourse> courses = null;
   private final @ModelField(targetType="CardData") @HasMany(associatedWith = "owner", type = CardData.class) List<CardData> cards = null;
   private final @ModelField(targetType="QuizData") @HasMany(associatedWith = "owner", type = QuizData.class) List<QuizData> quizzes = null;
@@ -54,10 +52,6 @@ public final class UserData implements Model {
       return role;
   }
   
-  public Integer getGrade() {
-      return grade;
-  }
-  
   public List<UserCourse> getCourses() {
       return courses;
   }
@@ -70,12 +64,11 @@ public final class UserData implements Model {
       return quizzes;
   }
   
-  private UserData(String id, String name, String username, String role, Integer grade) {
+  private UserData(String id, String name, String username, String role) {
     this.id = id;
     this.name = name;
     this.username = username;
     this.role = role;
-    this.grade = grade;
   }
   
   @Override
@@ -89,8 +82,7 @@ public final class UserData implements Model {
       return ObjectsCompat.equals(getId(), userData.getId()) &&
               ObjectsCompat.equals(getName(), userData.getName()) &&
               ObjectsCompat.equals(getUsername(), userData.getUsername()) &&
-              ObjectsCompat.equals(getRole(), userData.getRole()) &&
-              ObjectsCompat.equals(getGrade(), userData.getGrade());
+              ObjectsCompat.equals(getRole(), userData.getRole());
       }
   }
   
@@ -101,7 +93,6 @@ public final class UserData implements Model {
       .append(getName())
       .append(getUsername())
       .append(getRole())
-      .append(getGrade())
       .toString()
       .hashCode();
   }
@@ -113,8 +104,7 @@ public final class UserData implements Model {
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("username=" + String.valueOf(getUsername()) + ", ")
-      .append("role=" + String.valueOf(getRole()) + ", ")
-      .append("grade=" + String.valueOf(getGrade()))
+      .append("role=" + String.valueOf(getRole()))
       .append("}")
       .toString();
   }
@@ -146,7 +136,6 @@ public final class UserData implements Model {
       id,
       null,
       null,
-      null,
       null
     );
   }
@@ -155,8 +144,7 @@ public final class UserData implements Model {
     return new CopyOfBuilder(id,
       name,
       username,
-      role,
-      grade);
+      role);
   }
   public interface NameStep {
     UsernameStep name(String name);
@@ -176,7 +164,6 @@ public final class UserData implements Model {
   public interface BuildStep {
     UserData build();
     BuildStep id(String id) throws IllegalArgumentException;
-    BuildStep grade(Integer grade);
   }
   
 
@@ -185,7 +172,6 @@ public final class UserData implements Model {
     private String name;
     private String username;
     private String role;
-    private Integer grade;
     @Override
      public UserData build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -194,8 +180,7 @@ public final class UserData implements Model {
           id,
           name,
           username,
-          role,
-          grade);
+          role);
     }
     
     @Override
@@ -216,12 +201,6 @@ public final class UserData implements Model {
      public BuildStep role(String role) {
         Objects.requireNonNull(role);
         this.role = role;
-        return this;
-    }
-    
-    @Override
-     public BuildStep grade(Integer grade) {
-        this.grade = grade;
         return this;
     }
     
@@ -248,12 +227,11 @@ public final class UserData implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String username, String role, Integer grade) {
+    private CopyOfBuilder(String id, String name, String username, String role) {
       super.id(id);
       super.name(name)
         .username(username)
-        .role(role)
-        .grade(grade);
+        .role(role);
     }
     
     @Override
@@ -269,11 +247,6 @@ public final class UserData implements Model {
     @Override
      public CopyOfBuilder role(String role) {
       return (CopyOfBuilder) super.role(role);
-    }
-    
-    @Override
-     public CopyOfBuilder grade(Integer grade) {
-      return (CopyOfBuilder) super.grade(grade);
     }
   }
   

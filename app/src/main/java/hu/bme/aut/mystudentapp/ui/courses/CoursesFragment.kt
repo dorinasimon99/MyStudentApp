@@ -28,10 +28,10 @@ import kotlinx.android.synthetic.main.content_courses.*
 import kotlinx.android.synthetic.main.fragment_courses.*
 import kotlinx.android.synthetic.main.single_class.*
 
-class CoursesFragment : RainbowCakeFragment<CoursesViewState, CoursesViewModel>(), CourseRecyclerViewAdapter.CourseItemClickListener,
-AddCourseFragment.NewCourseFragmentListener/*, SearchCoursesFragment.NewCourseFromListFragmentListener*/ {
+class CoursesFragment : RainbowCakeFragment<CoursesViewState, CoursesViewModel>(), CoursesListAdapter.CourseItemClickListener,
+AddCourseFragment.NewCourseFragmentListener{
 
-    private lateinit var adapter : CourseRecyclerViewAdapter
+    private lateinit var courseAdapter : CoursesListAdapter
 
     override fun provideViewModel() = getViewModelFromFactory()
 
@@ -42,19 +42,12 @@ AddCourseFragment.NewCourseFragmentListener/*, SearchCoursesFragment.NewCourseFr
 
         viewModel.loadCourses()
 
-        setupRecyclerView(courses_list)
+        courseAdapter = CoursesListAdapter(this, ArrayList())
+        courses_list.adapter = courseAdapter
 
         fabAddCourse.setOnClickListener {
             findNavController().navigate(R.id.addCourseFragment)
         }
-    }
-
-    private fun setupRecyclerView(recyclerView: RecyclerView){
-        UserDataBackend.localCourses().observe(requireActivity(), { courses ->
-            adapter = CourseRecyclerViewAdapter(courses, this)
-            recyclerView.adapter = adapter
-            adapter.update(courses)
-        })
     }
 
     override fun render(viewState: CoursesViewState) {
@@ -62,7 +55,13 @@ AddCourseFragment.NewCourseFragmentListener/*, SearchCoursesFragment.NewCourseFr
             Initial -> {
                 (activity as MainActivity).supportActionBar?.title = "My courses"
             }
-            CoursesLoading -> {}
+            is CoursesLoading -> {
+                courseAdapter.submitList(null)
+                courseAdapter.submitList(viewState.courses)
+                if(viewState.courses != null){
+                    viewModel.saveToLocal(viewState.courses)
+                } else {}
+            }
             CourseLoadingError -> {
                 Toast.makeText(context, "Error in loading courses", Toast.LENGTH_SHORT).show()
             }
@@ -70,8 +69,7 @@ AddCourseFragment.NewCourseFragmentListener/*, SearchCoursesFragment.NewCourseFr
     }
 
     override fun onCourseClicked(item: Course) {
-        //TODO: teacher-re is, és tudja eldönteni, melyik kell
-        val bundle = bundleOf("selectedCourseName" to item.name)
+        val bundle = bundleOf("selectedCourseName" to item.name, "selectedCourseCode" to item.courseCode)
         if(UserDataBackend.currentUser.role == Role.STUDENT.toString()){
             findNavController().navigate(R.id.courseDetailsStudentFragment, bundle)
         } else if(UserDataBackend.currentUser.role == Role.TEACHER.toString()){
@@ -80,6 +78,6 @@ AddCourseFragment.NewCourseFragmentListener/*, SearchCoursesFragment.NewCourseFr
     }
 
     override fun onCourseCreated(newCourse: Course) {
-        adapter.addItem(newCourse)
+        viewModel.loadCourses()
     }
 }

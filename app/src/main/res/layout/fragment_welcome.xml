@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hu.bme.aut.mystudentapp.ui.student.StudentWelcomeFragment"
+    android:orientation="vertical"
+    android:id="@+id/studentMain"
+    android:layout_marginTop="@dimen/appbarmargin"
+    android:gravity="center">
+
+    <Button
+            android:id="@+id/btnClasses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_baseline_class_144"
+            android:text="@string/classes"
+            android:padding="50dp"
+            style="@style/Widget.StudentApp.Button.Borderless.Colored"
+            tools:ignore="NestedWeights" />
+
+        <Button
+            android:id="@+id/btnSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_baseline_schedule_144"
+            android:text="@string/schedule"
+            android:padding="50dp"
+            style="@style/Widget.StudentApp.Button.Borderless.Colored"/>
+
+</LinearLayout>

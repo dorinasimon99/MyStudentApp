@@ -15,6 +15,9 @@ interface CourseDao {
     @Query("SELECT * FROM course WHERE courseId = :id")
     suspend fun getCourse(id: String) : LocalCourseEntity
 
+    @Query("SELECT teachersList FROM course WHERE courseName = :coursename")
+    suspend fun getCourseTeachers(coursename: String) : String?
+
     @Insert
     suspend fun insert(course: LocalCourseEntity)
 

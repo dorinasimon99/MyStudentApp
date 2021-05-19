@@ -5,10 +5,14 @@ query GetUserData($id: ID!) {
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -55,7 +59,6 @@ query ListUserDatas(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -80,6 +83,11 @@ query GetCourseData($id: ID!) {
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -112,6 +120,7 @@ query GetCourseData($id: ID!) {
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -138,6 +147,7 @@ query ListCourseDatas(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -153,7 +163,6 @@ query GetUserCourse($id: ID!) {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -182,10 +191,16 @@ query GetUserCourse($id: ID!) {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -204,7 +219,6 @@ query ListUserCourses(
         name
         username
         role
-        grade
         createdAt
         updatedAt
         owner
@@ -215,10 +229,16 @@ query ListUserCourses(
         name
         credits
         time
+        teachers
         createdAt
         updatedAt
         owner
       }
+      rating
+      ratingNum
+      semester
+      grade
+      lessons
       createdAt
       updatedAt
       owner
@@ -235,7 +255,6 @@ query GetCardData($id: ID!) {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -265,6 +284,7 @@ query GetCardData($id: ID!) {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -289,7 +309,6 @@ query ListCardDatas(
         name
         username
         role
-        grade
         createdAt
         updatedAt
         owner
@@ -301,6 +320,7 @@ query ListCardDatas(
         name
         credits
         time
+        teachers
         createdAt
         updatedAt
         owner
@@ -322,7 +342,6 @@ query GetQuizData($id: ID!) {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -352,6 +371,7 @@ query GetQuizData($id: ID!) {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -376,7 +396,6 @@ query ListQuizDatas(
         name
         username
         role
-        grade
         createdAt
         updatedAt
         owner
@@ -388,6 +407,7 @@ query ListQuizDatas(
         name
         credits
         time
+        teachers
         createdAt
         updatedAt
         owner
@@ -396,6 +416,68 @@ query ListQuizDatas(
       quizAnswers
       createdAt
       updatedAt
+    }
+    nextToken
+  }
+}
+query GetCommentData($id: ID!) {
+  getCommentData(id: $id) {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListCommentDatas(
+  $filter: ModelCommentDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listCommentDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      comment
+      coursename
+      teachername
+      createdAt
+      updatedAt
+      owner
+    }
+    nextToken
+  }
+}
+query GetTodoData($id: ID!) {
+  getTodoData(id: $id) {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
+  }
+}
+query ListTodoDatas(
+  $filter: ModelTodoDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTodoDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      done
+      ownerID
+      courseID
+      createdAt
+      updatedAt
+      owner
     }
     nextToken
   }

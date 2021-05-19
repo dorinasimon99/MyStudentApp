@@ -2,15 +2,15 @@ package hu.bme.aut.mystudentapp.data
 
 import android.util.Log
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import co.zsmb.rainbowcake.withIOContext
 import hu.bme.aut.mystudentapp.backend.NetworkBackend
 import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.data.dataAnnotationObject.UserDataDao
-import hu.bme.aut.mystudentapp.data.model.LocalUserData
-import hu.bme.aut.mystudentapp.data.model.Role
-import hu.bme.aut.mystudentapp.data.model.User
+import hu.bme.aut.mystudentapp.data.model.*
+import hu.bme.aut.mystudentapp.ui.MainActivity
 import hu.mystudentapp.R
 import kotlinx.coroutines.flow.Flow
 import java.util.*
@@ -21,8 +21,8 @@ import javax.inject.Singleton
 class UserDataSource @Inject constructor(
     private val userDataDao: UserDataDao
 ){
-    suspend fun isSignedIn() : Boolean {
-         return NetworkBackend.userData()
+    suspend fun isSignedIn() : LiveData<Boolean> {
+        return UserDataBackend.isSignedIn
     }
 
     suspend fun setSignedIn(newValue: Boolean) {
@@ -31,8 +31,8 @@ class UserDataSource @Inject constructor(
 
     var hasUserData : LiveData<User> = UserDataBackend.hasUserData
 
-    suspend fun getUserData(username: String?) {
-        UserDataBackend.getUserData(username)
+    suspend fun getUserData(username: String?) : User? {
+        return UserDataBackend.getUserData(username)
     }
 
     suspend fun setUserData(user: User){
@@ -47,12 +47,12 @@ class UserDataSource @Inject constructor(
         UserDataBackend.setUserData(user)
     }
 
-    suspend fun loadRates(){
-        UserDataBackend.getRates()
+    suspend fun loadRates(teachername: String) : List<TeacherRate>? {
+        return UserDataBackend.getRates(teachername)
     }
 
-    suspend fun loadComments(){
-        UserDataBackend.getComments()
+    suspend fun loadComments(teachername: String) : List<StudentComment>?{
+        return UserDataBackend.getComments(teachername)
     }
 
     suspend fun getLocalUser() : LocalUserData? {
@@ -71,5 +71,17 @@ class UserDataSource @Inject constructor(
     }
     private suspend fun changeLocal(newUser: LocalUserData) = withIOContext{
         userDataDao.changeLocalUser(newUser.id, newUser.username)
+    }
+
+    suspend fun addRate(rate: TeacherRate) : List<TeacherRate>?{
+        return if(UserDataBackend.createRate(rate)){
+            UserDataBackend.rates(rate.teacherName)
+        }else UserDataBackend.rates(rate.teacherName)
+    }
+
+    suspend fun addComment(comment: StudentComment) : List<StudentComment>?{
+        return if(UserDataBackend.createComment(comment)){
+            UserDataBackend.comments(comment.teacherName)
+        } else UserDataBackend.comments(comment.teacherName)
     }
 }

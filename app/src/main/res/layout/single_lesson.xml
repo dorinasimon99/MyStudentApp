@@ -4,49 +4,69 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4">
+        android:layout_marginVertical="10dp">
 
-        <TextView
-            android:id="@+id/tvLessonTitle"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:textSize="26sp"/>
-
-        <TextView
-            android:id="@+id/tvLessonRate"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <ToggleButton
+            android:id="@+id/tbtnLessonTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:drawablePadding="5dp"
-            android:gravity="center"
-            app:drawableStartCompat="@drawable/ic_baseline_star_rate_12" />
+            android:gravity="center_vertical"
+            style="@style/StudentApp.Button.TextButton"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvLessonDescription"
+    <LinearLayout
+        android:id="@+id/layoutLessonTodos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="gone"/>
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginVertical="10dp">
 
-    <ScrollView
-        android:id="@+id/scrollViewLessonNotes"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="8"
+            android:layout_marginEnd="30dp"
+            android:paddingVertical="10dp">
 
-        <androidx.recyclerview.widget.RecyclerView
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:text="@string/todos"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/btnAddLessonTodo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_add_36"
+                style="@style/Widget.StudentApp.ImageButton.Borderless.Colored"/>
+
+        </LinearLayout>
+
+
+        <ScrollView
+            android:id="@+id/scrollViewLessonNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comments_list"
                 android:name="hu.bme.aut.mystudentapp.NotesListFragment"
                 android:layout_width="match_parent"
@@ -55,17 +75,64 @@
                 tools:context=".LessonsFragment"
                 tools:listitem="@layout/single_todo"/>
 
-    </ScrollView>
+        </ScrollView>
 
-    <TextView
-        android:id="@+id/tvQuiz"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutLessonQuizzes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="20sp"
-        android:visibility="gone"/>
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginVertical="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="8"
+            android:layout_marginEnd="30dp"
+            android:paddingVertical="10dp">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                android:text="@string/quizzes"
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
 
+            <ImageButton
+                android:id="@+id/btnAddQuiz"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_add_36"
+                style="@style/Widget.StudentApp.ImageButton.Borderless.Colored"/>
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/teacher_quizzes_list"
+                    android:name="hu.bme.aut.mystudentapp.TeacherQuizListFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/single_teacher_quiz"/>
+
+            </FrameLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
 
 </LinearLayout>

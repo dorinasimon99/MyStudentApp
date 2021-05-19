@@ -14,7 +14,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:textAlignment="viewStart"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        style="@style/StudentApp.Button.TextButton"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -8,12 +8,10 @@ sealed class MainScreenViewState
 
 object MainScreenInitial : MainScreenViewState()
 
-//object MainScreenSignedIn : MainScreenViewState()
-
-//object MainScreenSignedOut : MainScreenViewState()
+object MainScreenSignedOut : MainScreenViewState()
 
 data class MainScreenLocalUser(val user: LocalUserData?) : MainScreenViewState()
 
-//data class MainScreenLoadingUser(val user: User?) : MainScreenViewState()
+data class MainScreenUserData(val user: User?) : MainScreenViewState()
 
 data class MainScreenError(val error: Exception) : MainScreenViewState()

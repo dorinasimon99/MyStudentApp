@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/btnSelectCourse"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        style="@style/StudentApp.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/appbarmargin"

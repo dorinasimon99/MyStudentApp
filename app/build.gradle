@@ -46,6 +46,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0-alpha05'
 
 
     // Amplify core dependency
@@ -56,14 +57,13 @@ dependencies {
     implementation "com.amplifyframework:aws-storage-s3:${amplify_version}"
 
     //Navigation Drawer
-    implementation 'com.google.android.material:material:1.4.0-alpha01'
+    implementation 'com.google.android.material:material:1.4.0-beta01'
 
     //Rainbowcake
     def rainbowcake_version = '1.3.0'
     implementation "co.zsmb:rainbow-cake-core:$rainbowcake_version"
     implementation "co.zsmb:rainbow-cake-dagger:$rainbowcake_version"
     testImplementation "co.zsmb:rainbow-cake-test:$rainbowcake_version"
-    //implementation "co.zsmb:rainbow-cake-timber:$rainbowcake_version"
 
     //Coroutines
     def coroutines_version = '1.3.9'
@@ -87,4 +87,9 @@ dependencies {
 
     //TimeTable
     implementation 'com.github.tlaabs:TimetableView:1.0.3-fx1'
+
+    //Fragment testing
+    def fragment_version = "1.3.3"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+
 }

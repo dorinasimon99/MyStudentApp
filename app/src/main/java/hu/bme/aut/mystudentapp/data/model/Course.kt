@@ -26,7 +26,7 @@ data class Course(
 
     companion object{
         fun from(courseData : CourseData) : Course {
-            val result = Course(courseData.id, courseData.courseCode, courseData.name, courseData.credits, courseData.time)
+            val result = Course(courseData.id, courseData.courseCode, courseData.name, courseData.credits, courseData.time, null, null, null, courseData.teachers)
             return result
         }
     }

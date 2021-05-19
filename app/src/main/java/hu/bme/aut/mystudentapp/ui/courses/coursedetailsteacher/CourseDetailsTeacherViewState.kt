@@ -4,4 +4,6 @@ sealed class CourseDetailsTeacherViewState
 
 object CourseDetailsTeacherInitial : CourseDetailsTeacherViewState()
 
-object CourseDetailsTeacherError : CourseDetailsTeacherViewState()
+data class CourseDetailsTeacherLessons(val lesson: List<Lesson>?) : CourseDetailsTeacherViewState()
+
+data class CourseDetailsTeacherError(val e: Exception) : CourseDetailsTeacherViewState()

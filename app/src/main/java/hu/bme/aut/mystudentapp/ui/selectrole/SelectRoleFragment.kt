@@ -1,15 +1,12 @@
 package hu.bme.aut.mystudentapp.ui.selectrole
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeDialogFragment
 import co.zsmb.rainbowcake.dagger.getViewModelFromFactory
 import co.zsmb.rainbowcake.extensions.exhaustive
-import hu.bme.aut.mystudentapp.backend.NetworkBackend
-import hu.bme.aut.mystudentapp.backend.UserDataBackend
 import hu.bme.aut.mystudentapp.data.model.Role
 import hu.bme.aut.mystudentapp.data.model.User
 import hu.bme.aut.mystudentapp.ui.MainActivity
@@ -17,7 +14,7 @@ import hu.mystudentapp.R
 import kotlinx.android.synthetic.main.fragment_select_role.*
 import java.util.*
 
-class SelectRoleFragment : RainbowCakeDialogFragment<SelectRoleScreenViewState, SelectRoleScreenViewModel>() {
+class SelectRoleFragment : RainbowCakeDialogFragment<SelectRoleScreenViewState, SelectRoleViewModel>() {
 
     private lateinit var role : Role
 
@@ -37,20 +34,16 @@ class SelectRoleFragment : RainbowCakeDialogFragment<SelectRoleScreenViewState, 
                 etLastName.requestFocus()
                 etLastName.error = "This field is required!"
             } else fullname += etLastName.text.toString()
-            if (etUsername.text!!.isEmpty()) {
-                etUsername.requestFocus()
-                etUsername.error = "This field is required!"
-            }
             when {
                 rbStudent.isChecked -> {
                     val user = User(UUID.randomUUID().toString(), fullname,
-                        Role.STUDENT.toString(), etUsername.text.toString())
+                        Role.STUDENT.toString(), arguments?.getString("username").toString())
                     role = Role.STUDENT
                     viewModel.selectRole(user)
                 }
                 rbTeacher.isChecked -> {
                     val user = User(UUID.randomUUID().toString(), fullname,
-                        Role.TEACHER.toString(), etUsername.text.toString())
+                        Role.TEACHER.toString(), arguments?.getString("username").toString())
                     role = Role.TEACHER
                     viewModel.selectRole(user)
                 }
@@ -76,6 +69,7 @@ class SelectRoleFragment : RainbowCakeDialogFragment<SelectRoleScreenViewState, 
                     Role.TEACHER -> {
                         findNavController().navigate(R.id.action_selectRoleFragment_to_teacherMainFragment)
                     }
+                    Role.NO_ROLE -> {}
                 }.exhaustive
             }
             SelectRoleError -> {

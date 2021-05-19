@@ -8,10 +8,14 @@ mutation CreateUserData(
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -56,10 +60,14 @@ mutation UpdateUserData(
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -104,10 +112,14 @@ mutation DeleteUserData(
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -154,6 +166,11 @@ mutation CreateCourseData(
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -186,6 +203,7 @@ mutation CreateCourseData(
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -202,6 +220,11 @@ mutation UpdateCourseData(
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -234,6 +257,7 @@ mutation UpdateCourseData(
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -250,6 +274,11 @@ mutation DeleteCourseData(
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -282,6 +311,7 @@ mutation DeleteCourseData(
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -298,7 +328,6 @@ mutation CreateUserCourse(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -327,10 +356,16 @@ mutation CreateUserCourse(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -347,7 +382,6 @@ mutation UpdateUserCourse(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -376,10 +410,16 @@ mutation UpdateUserCourse(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -396,7 +436,6 @@ mutation DeleteUserCourse(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -425,10 +464,16 @@ mutation DeleteUserCourse(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -446,7 +491,6 @@ mutation CreateCardData(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -476,6 +520,7 @@ mutation CreateCardData(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -498,7 +543,6 @@ mutation UpdateCardData(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -528,6 +572,7 @@ mutation UpdateCardData(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -550,7 +595,6 @@ mutation DeleteCardData(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -580,6 +624,7 @@ mutation DeleteCardData(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -602,7 +647,6 @@ mutation CreateQuizData(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -632,6 +676,7 @@ mutation CreateQuizData(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -654,7 +699,6 @@ mutation UpdateQuizData(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -684,6 +728,7 @@ mutation UpdateQuizData(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -706,7 +751,6 @@ mutation DeleteQuizData(
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -736,6 +780,7 @@ mutation DeleteQuizData(
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -744,5 +789,95 @@ mutation DeleteQuizData(
     quizAnswers
     createdAt
     updatedAt
+  }
+}
+mutation CreateCommentData(
+  $input: CreateCommentDataInput!
+  $condition: ModelCommentDataConditionInput
+) {
+  createCommentData(input: $input, condition: $condition) {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateCommentData(
+  $input: UpdateCommentDataInput!
+  $condition: ModelCommentDataConditionInput
+) {
+  updateCommentData(input: $input, condition: $condition) {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteCommentData(
+  $input: DeleteCommentDataInput!
+  $condition: ModelCommentDataConditionInput
+) {
+  deleteCommentData(input: $input, condition: $condition) {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation CreateTodoData(
+  $input: CreateTodoDataInput!
+  $condition: ModelTodoDataConditionInput
+) {
+  createTodoData(input: $input, condition: $condition) {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation UpdateTodoData(
+  $input: UpdateTodoDataInput!
+  $condition: ModelTodoDataConditionInput
+) {
+  updateTodoData(input: $input, condition: $condition) {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
+  }
+}
+mutation DeleteTodoData(
+  $input: DeleteTodoDataInput!
+  $condition: ModelTodoDataConditionInput
+) {
+  deleteTodoData(input: $input, condition: $condition) {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
   }
 }

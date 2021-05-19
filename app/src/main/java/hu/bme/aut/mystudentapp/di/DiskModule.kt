@@ -19,6 +19,7 @@ class DiskModule {
         return Room.databaseBuilder(context, LocalDatabase::class.java, "local.db")
             .addMigrations(migration1_2)
             .addMigrations(migration2_3)
+            .addMigrations(migration3_4)
             .build()
     }
 
@@ -31,6 +32,12 @@ class DiskModule {
     val migration2_3 = object : Migration(2, 3) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL("ALTER TABLE `course` ADD `ownerId` TEXT")
+        }
+    }
+
+    val migration3_4 = object : Migration(3, 4) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE `course` ADD `teachersList` TEXT")
         }
     }
 

@@ -5,10 +5,14 @@ subscription OnCreateUserData {
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -50,10 +54,14 @@ subscription OnUpdateUserData {
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -95,10 +103,14 @@ subscription OnDeleteUserData {
     name
     username
     role
-    grade
     courses {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -142,6 +154,11 @@ subscription OnCreateCourseData {
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -174,6 +191,7 @@ subscription OnCreateCourseData {
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -187,6 +205,11 @@ subscription OnUpdateCourseData {
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -219,6 +242,7 @@ subscription OnUpdateCourseData {
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -232,6 +256,11 @@ subscription OnDeleteCourseData {
     users {
       items {
         id
+        rating
+        ratingNum
+        semester
+        grade
+        lessons
         createdAt
         updatedAt
         owner
@@ -264,6 +293,7 @@ subscription OnDeleteCourseData {
       nextToken
     }
     time
+    teachers
     createdAt
     updatedAt
     owner
@@ -277,7 +307,6 @@ subscription OnCreateUserCourse {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -306,10 +335,16 @@ subscription OnCreateUserCourse {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -323,7 +358,6 @@ subscription OnUpdateUserCourse {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -352,10 +386,16 @@ subscription OnUpdateUserCourse {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -369,7 +409,6 @@ subscription OnDeleteUserCourse {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -398,10 +437,16 @@ subscription OnDeleteUserCourse {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
     }
+    rating
+    ratingNum
+    semester
+    grade
+    lessons
     createdAt
     updatedAt
     owner
@@ -416,7 +461,6 @@ subscription OnCreateCardData {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -446,6 +490,7 @@ subscription OnCreateCardData {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -465,7 +510,6 @@ subscription OnUpdateCardData {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -495,6 +539,7 @@ subscription OnUpdateCardData {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -514,7 +559,6 @@ subscription OnDeleteCardData {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -544,6 +588,7 @@ subscription OnDeleteCardData {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -563,7 +608,6 @@ subscription OnCreateQuizData {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -593,6 +637,7 @@ subscription OnCreateQuizData {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -612,7 +657,6 @@ subscription OnUpdateQuizData {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -642,6 +686,7 @@ subscription OnUpdateQuizData {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -661,7 +706,6 @@ subscription OnDeleteQuizData {
       name
       username
       role
-      grade
       courses {
         nextToken
       }
@@ -691,6 +735,7 @@ subscription OnDeleteQuizData {
         nextToken
       }
       time
+      teachers
       createdAt
       updatedAt
       owner
@@ -699,5 +744,77 @@ subscription OnDeleteQuizData {
     quizAnswers
     createdAt
     updatedAt
+  }
+}
+subscription OnCreateCommentData {
+  onCreateCommentData {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateCommentData {
+  onUpdateCommentData {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteCommentData {
+  onDeleteCommentData {
+    id
+    name
+    comment
+    coursename
+    teachername
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnCreateTodoData {
+  onCreateTodoData {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnUpdateTodoData {
+  onUpdateTodoData {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
+  }
+}
+subscription OnDeleteTodoData {
+  onDeleteTodoData {
+    id
+    name
+    done
+    ownerID
+    courseID
+    createdAt
+    updatedAt
+    owner
   }
 }

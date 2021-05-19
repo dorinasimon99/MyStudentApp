@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import hu.mystudentapp.R
 
 class TeacherRecyclerViewAdapter(
-    private val values: MutableList<String>?,
+    private val values: List<String>?,
     private val teacherClickListener: TeacherClickListener
 ): RecyclerView.Adapter<TeacherRecyclerViewAdapter.ViewHolder>() {
 

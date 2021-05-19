@@ -9,9 +9,7 @@ object SignInInitial : SignInScreenViewState()
 
 object SignedIn : SignInScreenViewState()
 
-//data class SignInLoading(val user: User?) : SignInScreenViewState()
-
-object SignUp : SignInScreenViewState()
+data class SignInUserData(val user: User?) : SignInScreenViewState()
 
 object ConfirmedSignUp : SignInScreenViewState()
 

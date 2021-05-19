@@ -41,6 +41,16 @@
     <string name="the_code_you_received_via_email">The code you received via email</string>
     <string name="or">OR</string>
     <string name="username">Username</string>
+    <string name="todo_text">Todo text</string>
+    <string name="add_rate">Add rate</string>
+    <string name="add">Add</string>
+    <string name="comments">Comments</string>
+    <string name="your_comment">Your comment</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="rates">Rates</string>
+    <string name="quizzes">Quizzes</string>
+    <string name="full_name">Full name</string>
+    <string name="confirmation_code_you_received">Confirmation code</string>
     <string-array name="weekdays">
         <item>Monday</item>
         <item>Tuesday</item>

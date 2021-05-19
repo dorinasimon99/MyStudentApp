@@ -11,7 +11,7 @@ import hu.bme.aut.mystudentapp.ui.MainActivity
 import hu.mystudentapp.R
 import kotlinx.android.synthetic.main.fragment_student_welcome.*
 
-class StudentWelcomeFragment : RainbowCakeFragment<StudentScreenViewState, StudentScreenViewModel>() {
+class StudentWelcomeFragment : RainbowCakeFragment<StudentScreenViewState, StudentViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,16 +23,16 @@ class StudentWelcomeFragment : RainbowCakeFragment<StudentScreenViewState, Stude
         btnSchedule.setOnClickListener {
             findNavController().navigate(R.id.action_studentMainFragment_to_scheduleFragment)
         }
+
     }
 
-    override fun getViewResource() = R.layout.fragment_student_welcome
+    override fun getViewResource() = R.layout.fragment_welcome
 
     override fun provideViewModel() = getViewModelFromFactory()
 
     override fun render(viewState: StudentScreenViewState) {
         when(viewState){
             StudentBegin -> {
-
             }
             is StudentInitial -> {
                 if(viewState.user?.name != null){

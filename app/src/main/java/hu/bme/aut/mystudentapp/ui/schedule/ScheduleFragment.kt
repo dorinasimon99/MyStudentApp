@@ -12,7 +12,7 @@ import hu.bme.aut.mystudentapp.ui.MainActivity
 import hu.mystudentapp.R
 import kotlinx.android.synthetic.main.fragment_schedule.*
 
-class ScheduleFragment : RainbowCakeFragment<ScheduleViewState, ScheduleViewModel>() {
+class ScheduleFragment : RainbowCakeFragment<ScheduleViewState, ScheduleViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

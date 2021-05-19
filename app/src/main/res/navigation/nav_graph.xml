@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/studentMainFragment"
         android:name="hu.bme.aut.mystudentapp.ui.student.StudentWelcomeFragment"
-        tools:layout="@layout/fragment_student_welcome">
+        tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_studentMainFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/teacherMainFragment"
         android:name="hu.bme.aut.mystudentapp.ui.teacher.TeacherWelcomeFragment"
-        tools:layout="@layout/fragment_teacher_welcome">
+        tools:layout="@layout/fragment_welcome">
         <action
             android:id="@+id/action_teacherMainFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_selectRoleFragment_to_studentMainFragment"
             app:destination="@id/studentMainFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -89,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
-        android:name="hu.bme.aut.mystudentapp.ui.main.MainScreenFragment"
+        android:name="hu.bme.aut.mystudentapp.ui.main.MainFragment"
         android:label="MainScreenFragment" >
         <action
             android:id="@+id/action_mainScreenFragment_to_signInFragment"
@@ -104,10 +107,6 @@
             android:id="@+id/action_mainScreenFragment_to_teacherMainFragment"
             app:destination="@id/teacherMainFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/loadingFragment"
-        android:name="hu.bme.aut.mystudentapp.ui.LoadingFragment"
-        android:label="LoadingFragment" />
     <fragment
         android:id="@+id/courseDetailsStudentFragment"
         android:name="hu.bme.aut.mystudentapp.ui.courses.coursedetailsstudent.CourseDetailsStudentFragment"
@@ -149,6 +148,9 @@
         android:label="CourseDetailsTeacherFragment" >
         <argument
             android:name="selectedCourseName"
+            app:argType="string" />
+        <argument
+            android:name="selectedCourseCode"
             app:argType="string" />
     </fragment>
 

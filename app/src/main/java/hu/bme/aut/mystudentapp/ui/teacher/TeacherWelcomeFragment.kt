@@ -1,17 +1,13 @@
 package hu.bme.aut.mystudentapp.ui.teacher
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.dagger.getViewModelFromFactory
 import co.zsmb.rainbowcake.extensions.exhaustive
 import hu.bme.aut.mystudentapp.ui.MainActivity
-import hu.bme.aut.mystudentapp.ui.student.*
 import hu.mystudentapp.R
 import kotlinx.android.synthetic.main.fragment_teacher_welcome.*
 
@@ -29,7 +25,7 @@ class TeacherWelcomeFragment : RainbowCakeFragment<TeacherViewState, TeacherView
         }
     }
 
-    override fun getViewResource() = R.layout.fragment_teacher_welcome
+    override fun getViewResource() = R.layout.fragment_welcome
 
     override fun provideViewModel() = getViewModelFromFactory()
 

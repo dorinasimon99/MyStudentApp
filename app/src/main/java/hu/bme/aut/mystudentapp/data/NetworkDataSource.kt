@@ -18,42 +18,29 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NetworkDataSource @Inject constructor(
-    private val userDataDao: UserDataDao
-){
+class NetworkDataSource @Inject constructor(){
     suspend fun signOut() {
         NetworkBackend.signOut()
-        //UserDataBackend.currentUserName = userDataDao.getLocalUser()?.username.toString()
-        //UserDataBackend.setSignedIn(false)
     }
 
-    suspend fun signIn(username: String, password: String) {
-        NetworkBackend.signIn(username, password)
-        //UserDataBackend.setSignedIn(true)
+    suspend fun signIn(username: String, password: String) : String {
+        return NetworkBackend.signIn(username, password)
     }
 
     suspend fun initialize(applicationContext: Context){
         NetworkBackend.initialize(applicationContext)
     }
 
-    suspend fun updateUserData() : Boolean? {
+    suspend fun updateUserData() : Boolean {
         return NetworkBackend.userData()
     }
 
-    suspend fun signUp(username: String, password: String, email: String){
-        NetworkBackend.signUp(username, password, email)
+    suspend fun signUp(username: String, password: String, email: String) : String? {
+        return NetworkBackend.signUp(username, password, email)
     }
 
-    suspend fun confirmSignUp(username: String, confirmCode: String, password: String){
-        NetworkBackend.confirmSignUp(username, confirmCode, password)
+    suspend fun confirmSignUp(username: String, confirmCode: String, password: String) : String {
+        return NetworkBackend.confirmSignUp(username, confirmCode, password)
     }
-
-    // pass the data from web redirect to Amplify libs
-    /*fun handleWebUISignInResponse(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d("NetworkDataSource", "received requestCode : $requestCode and resultCode : $resultCode")
-        if (requestCode == AWSCognitoAuthPlugin.WEB_UI_SIGN_IN_ACTIVITY_CODE) {
-            Amplify.Auth.handleWebUISignInResponse(data)
-        }
-    }*/
 
 }
